@@ -1,0 +1,2252 @@
+[
+  {
+    "Id": 1,
+    "Name": "Almond Butter Toast",
+    "PortionGrams": 80,
+    "Calories": 220,
+    "Protein": 7,
+    "Carbohydrates": 20,
+    "Fat": 13
+  },
+  {
+    "Id": 2,
+    "Name": "Almond Milk",
+    "PortionGrams": 240,
+    "Calories": 39,
+    "Protein": 1,
+    "Carbohydrates": 3.5,
+    "Fat": 2.5
+  },
+  {
+    "Id": 3,
+    "Name": "Almonds",
+    "PortionGrams": 30,
+    "Calories": 173,
+    "Protein": 6,
+    "Carbohydrates": 6,
+    "Fat": 15
+  },
+  {
+    "Id": 4,
+    "Name": "Apple",
+    "PortionGrams": 182,
+    "Calories": 95,
+    "Protein": 0.5,
+    "Carbohydrates": 25,
+    "Fat": 0.3
+  },
+  {
+    "Id": 5,
+    "Name": "Apple Pie Slice",
+    "PortionGrams": 117,
+    "Calories": 296,
+    "Protein": 2.5,
+    "Carbohydrates": 43,
+    "Fat": 14
+  },
+  {
+    "Id": 6,
+    "Name": "Apple with Peanut Butter",
+    "PortionGrams": 150,
+    "Calories": 230,
+    "Protein": 5,
+    "Carbohydrates": 30,
+    "Fat": 11
+  },
+  {
+    "Id": 7,
+    "Name": "Avocado",
+    "PortionGrams": 150,
+    "Calories": 240,
+    "Protein": 3,
+    "Carbohydrates": 13,
+    "Fat": 22
+  },
+  {
+    "Id": 8,
+    "Name": "Avocado Toast",
+    "PortionGrams": 150,
+    "Calories": 290,
+    "Protein": 7,
+    "Carbohydrates": 30,
+    "Fat": 16
+  },
+  {
+    "Id": 9,
+    "Name": "Avocado with Crackers",
+    "PortionGrams": 100,
+    "Calories": 240,
+    "Protein": 3,
+    "Carbohydrates": 18,
+    "Fat": 17
+  },
+  {
+    "Id": 10,
+    "Name": "Bacon",
+    "PortionGrams": 30,
+    "Calories": 130,
+    "Protein": 9,
+    "Carbohydrates": 0.4,
+    "Fat": 10
+  },
+  {
+    "Id": 11,
+    "Name": "Bagel",
+    "PortionGrams": 98,
+    "Calories": 270,
+    "Protein": 11,
+    "Carbohydrates": 53,
+    "Fat": 1.5
+  },
+  {
+    "Id": 12,
+    "Name": "Baked Cod",
+    "PortionGrams": 200,
+    "Calories": 164,
+    "Protein": 36,
+    "Carbohydrates": 0,
+    "Fat": 1.4
+  },
+  {
+    "Id": 13,
+    "Name": "Baked Potato",
+    "PortionGrams": 200,
+    "Calories": 188,
+    "Protein": 4.6,
+    "Carbohydrates": 44,
+    "Fat": 0.2
+  },
+  {
+    "Id": 14,
+    "Name": "Baked Salmon",
+    "PortionGrams": 200,
+    "Calories": 416,
+    "Protein": 40,
+    "Carbohydrates": 0,
+    "Fat": 26
+  },
+  {
+    "Id": 15,
+    "Name": "Baked Turkey",
+    "PortionGrams": 200,
+    "Calories": 330,
+    "Protein": 54,
+    "Carbohydrates": 0,
+    "Fat": 12
+  },
+  {
+    "Id": 16,
+    "Name": "Banana",
+    "PortionGrams": 120,
+    "Calories": 105,
+    "Protein": 1.3,
+    "Carbohydrates": 27,
+    "Fat": 0.4
+  },
+  {
+    "Id": 17,
+    "Name": "Banana Bread",
+    "PortionGrams": 60,
+    "Calories": 196,
+    "Protein": 3,
+    "Carbohydrates": 33,
+    "Fat": 6
+  },
+  {
+    "Id": 18,
+    "Name": "Banana Smoothie",
+    "PortionGrams": 300,
+    "Calories": 210,
+    "Protein": 5,
+    "Carbohydrates": 44,
+    "Fat": 2
+  },
+  {
+    "Id": 19,
+    "Name": "Banana with Almonds",
+    "PortionGrams": 150,
+    "Calories": 230,
+    "Protein": 5,
+    "Carbohydrates": 32,
+    "Fat": 9
+  },
+  {
+    "Id": 20,
+    "Name": "BBQ Ribs",
+    "PortionGrams": 200,
+    "Calories": 520,
+    "Protein": 36,
+    "Carbohydrates": 18,
+    "Fat": 34
+  },
+  {
+    "Id": 21,
+    "Name": "Beef Burger (no bun)",
+    "PortionGrams": 150,
+    "Calories": 340,
+    "Protein": 30,
+    "Carbohydrates": 2,
+    "Fat": 24
+  },
+  {
+    "Id": 22,
+    "Name": "Beef Burrito",
+    "PortionGrams": 250,
+    "Calories": 490,
+    "Protein": 25,
+    "Carbohydrates": 55,
+    "Fat": 18
+  },
+  {
+    "Id": 23,
+    "Name": "Beef Chili",
+    "PortionGrams": 300,
+    "Calories": 400,
+    "Protein": 28,
+    "Carbohydrates": 36,
+    "Fat": 16
+  },
+  {
+    "Id": 24,
+    "Name": "Beef Meatballs",
+    "PortionGrams": 200,
+    "Calories": 440,
+    "Protein": 30,
+    "Carbohydrates": 14,
+    "Fat": 30
+  },
+  {
+    "Id": 25,
+    "Name": "Beef Steak",
+    "PortionGrams": 200,
+    "Calories": 448,
+    "Protein": 50,
+    "Carbohydrates": 0,
+    "Fat": 27
+  },
+  {
+    "Id": 26,
+    "Name": "Beef Stew",
+    "PortionGrams": 300,
+    "Calories": 390,
+    "Protein": 30,
+    "Carbohydrates": 28,
+    "Fat": 18
+  },
+  {
+    "Id": 27,
+    "Name": "Beef Tacos",
+    "PortionGrams": 200,
+    "Calories": 440,
+    "Protein": 26,
+    "Carbohydrates": 38,
+    "Fat": 20
+  },
+  {
+    "Id": 28,
+    "Name": "Biscuits",
+    "PortionGrams": 30,
+    "Calories": 148,
+    "Protein": 2,
+    "Carbohydrates": 20,
+    "Fat": 7
+  },
+  {
+    "Id": 29,
+    "Name": "Black Beans",
+    "PortionGrams": 150,
+    "Calories": 198,
+    "Protein": 13,
+    "Carbohydrates": 36,
+    "Fat": 0.8
+  },
+  {
+    "Id": 30,
+    "Name": "BLT Sandwich",
+    "PortionGrams": 200,
+    "Calories": 400,
+    "Protein": 16,
+    "Carbohydrates": 38,
+    "Fat": 20
+  },
+  {
+    "Id": 31,
+    "Name": "Blueberries",
+    "PortionGrams": 100,
+    "Calories": 57,
+    "Protein": 0.7,
+    "Carbohydrates": 14,
+    "Fat": 0.3
+  },
+  {
+    "Id": 32,
+    "Name": "Boiled Egg",
+    "PortionGrams": 60,
+    "Calories": 78,
+    "Protein": 6,
+    "Carbohydrates": 0.6,
+    "Fat": 5
+  },
+  {
+    "Id": 33,
+    "Name": "Bran Flakes",
+    "PortionGrams": 40,
+    "Calories": 130,
+    "Protein": 4,
+    "Carbohydrates": 28,
+    "Fat": 1
+  },
+  {
+    "Id": 34,
+    "Name": "Broccoli",
+    "PortionGrams": 150,
+    "Calories": 51,
+    "Protein": 4.2,
+    "Carbohydrates": 10.5,
+    "Fat": 0.6
+  },
+  {
+    "Id": 35,
+    "Name": "Brown Rice",
+    "PortionGrams": 150,
+    "Calories": 324,
+    "Protein": 6.8,
+    "Carbohydrates": 67,
+    "Fat": 2.7
+  },
+  {
+    "Id": 36,
+    "Name": "Brownie",
+    "PortionGrams": 60,
+    "Calories": 243,
+    "Protein": 3,
+    "Carbohydrates": 35,
+    "Fat": 11
+  },
+  {
+    "Id": 37,
+    "Name": "Butter",
+    "PortionGrams": 10,
+    "Calories": 72,
+    "Protein": 0.1,
+    "Carbohydrates": 0,
+    "Fat": 8
+  },
+  {
+    "Id": 38,
+    "Name": "Caesar Salad",
+    "PortionGrams": 200,
+    "Calories": 290,
+    "Protein": 8,
+    "Carbohydrates": 14,
+    "Fat": 23
+  },
+  {
+    "Id": 39,
+    "Name": "Cappuccino",
+    "PortionGrams": 180,
+    "Calories": 80,
+    "Protein": 4,
+    "Carbohydrates": 7,
+    "Fat": 4
+  },
+  {
+    "Id": 40,
+    "Name": "Caprese Salad",
+    "PortionGrams": 150,
+    "Calories": 220,
+    "Protein": 12,
+    "Carbohydrates": 4,
+    "Fat": 17
+  },
+  {
+    "Id": 41,
+    "Name": "Carrot",
+    "PortionGrams": 150,
+    "Calories": 62,
+    "Protein": 1.4,
+    "Carbohydrates": 15,
+    "Fat": 0.3
+  },
+  {
+    "Id": 42,
+    "Name": "Cashews",
+    "PortionGrams": 30,
+    "Calories": 157,
+    "Protein": 5.2,
+    "Carbohydrates": 9,
+    "Fat": 12
+  },
+  {
+    "Id": 43,
+    "Name": "Cauliflower Rice",
+    "PortionGrams": 150,
+    "Calories": 60,
+    "Protein": 3,
+    "Carbohydrates": 10,
+    "Fat": 1
+  },
+  {
+    "Id": 44,
+    "Name": "Celery with Cream Cheese",
+    "PortionGrams": 100,
+    "Calories": 110,
+    "Protein": 2,
+    "Carbohydrates": 4,
+    "Fat": 9
+  },
+  {
+    "Id": 45,
+    "Name": "Cereal (corn flakes)",
+    "PortionGrams": 30,
+    "Calories": 110,
+    "Protein": 2,
+    "Carbohydrates": 25,
+    "Fat": 0.2
+  },
+  {
+    "Id": 46,
+    "Name": "Cheddar Cheese",
+    "PortionGrams": 30,
+    "Calories": 120,
+    "Protein": 7,
+    "Carbohydrates": 0.4,
+    "Fat": 10
+  },
+  {
+    "Id": 47,
+    "Name": "Cheese and Ham Toastie",
+    "PortionGrams": 150,
+    "Calories": 370,
+    "Protein": 18,
+    "Carbohydrates": 32,
+    "Fat": 18
+  },
+  {
+    "Id": 48,
+    "Name": "Cheese Crackers",
+    "PortionGrams": 40,
+    "Calories": 180,
+    "Protein": 4,
+    "Carbohydrates": 22,
+    "Fat": 9
+  },
+  {
+    "Id": 49,
+    "Name": "Cheese Pizza",
+    "PortionGrams": 200,
+    "Calories": 500,
+    "Protein": 20,
+    "Carbohydrates": 60,
+    "Fat": 20
+  },
+  {
+    "Id": 50,
+    "Name": "Cheese Slice",
+    "PortionGrams": 30,
+    "Calories": 110,
+    "Protein": 7,
+    "Carbohydrates": 0.4,
+    "Fat": 9
+  },
+  {
+    "Id": 51,
+    "Name": "Cheesecake Slice",
+    "PortionGrams": 80,
+    "Calories": 260,
+    "Protein": 5,
+    "Carbohydrates": 24,
+    "Fat": 16
+  },
+  {
+    "Id": 52,
+    "Name": "Chia Pudding",
+    "PortionGrams": 150,
+    "Calories": 180,
+    "Protein": 6,
+    "Carbohydrates": 20,
+    "Fat": 9
+  },
+  {
+    "Id": 53,
+    "Name": "Chia Seeds with Milk",
+    "PortionGrams": 150,
+    "Calories": 180,
+    "Protein": 6,
+    "Carbohydrates": 18,
+    "Fat": 9
+  },
+  {
+    "Id": 54,
+    "Name": "Chicken Breast",
+    "PortionGrams": 150,
+    "Calories": 248,
+    "Protein": 46,
+    "Carbohydrates": 0,
+    "Fat": 5.4
+  },
+  {
+    "Id": 55,
+    "Name": "Chicken Caesar Wrap",
+    "PortionGrams": 200,
+    "Calories": 430,
+    "Protein": 28,
+    "Carbohydrates": 38,
+    "Fat": 18
+  },
+  {
+    "Id": 56,
+    "Name": "Chicken Curry",
+    "PortionGrams": 300,
+    "Calories": 450,
+    "Protein": 38,
+    "Carbohydrates": 30,
+    "Fat": 20
+  },
+  {
+    "Id": 57,
+    "Name": "Chicken Fajitas",
+    "PortionGrams": 250,
+    "Calories": 410,
+    "Protein": 34,
+    "Carbohydrates": 36,
+    "Fat": 14
+  },
+  {
+    "Id": 58,
+    "Name": "Chicken Sandwich",
+    "PortionGrams": 180,
+    "Calories": 440,
+    "Protein": 28,
+    "Carbohydrates": 42,
+    "Fat": 16
+  },
+  {
+    "Id": 59,
+    "Name": "Chicken Shawarma",
+    "PortionGrams": 200,
+    "Calories": 430,
+    "Protein": 30,
+    "Carbohydrates": 38,
+    "Fat": 16
+  },
+  {
+    "Id": 60,
+    "Name": "Chicken Souvlaki",
+    "PortionGrams": 200,
+    "Calories": 360,
+    "Protein": 40,
+    "Carbohydrates": 12,
+    "Fat": 16
+  },
+  {
+    "Id": 61,
+    "Name": "Chicken Stir Fry",
+    "PortionGrams": 250,
+    "Calories": 310,
+    "Protein": 30,
+    "Carbohydrates": 20,
+    "Fat": 12
+  },
+  {
+    "Id": 62,
+    "Name": "Chicken Tacos",
+    "PortionGrams": 200,
+    "Calories": 380,
+    "Protein": 24,
+    "Carbohydrates": 36,
+    "Fat": 14
+  },
+  {
+    "Id": 63,
+    "Name": "Chickpea Curry",
+    "PortionGrams": 300,
+    "Calories": 380,
+    "Protein": 16,
+    "Carbohydrates": 52,
+    "Fat": 14
+  },
+  {
+    "Id": 64,
+    "Name": "Chickpea Salad",
+    "PortionGrams": 200,
+    "Calories": 290,
+    "Protein": 14,
+    "Carbohydrates": 40,
+    "Fat": 9
+  },
+  {
+    "Id": 65,
+    "Name": "Chips (potato)",
+    "PortionGrams": 30,
+    "Calories": 152,
+    "Protein": 2,
+    "Carbohydrates": 15,
+    "Fat": 10
+  },
+  {
+    "Id": 66,
+    "Name": "Chocolate Bar",
+    "PortionGrams": 40,
+    "Calories": 210,
+    "Protein": 3,
+    "Carbohydrates": 24,
+    "Fat": 11
+  },
+  {
+    "Id": 67,
+    "Name": "Chocolate Cake",
+    "PortionGrams": 80,
+    "Calories": 280,
+    "Protein": 4,
+    "Carbohydrates": 38,
+    "Fat": 13
+  },
+  {
+    "Id": 68,
+    "Name": "Chocolate Chip Cookies",
+    "PortionGrams": 30,
+    "Calories": 148,
+    "Protein": 1.5,
+    "Carbohydrates": 19,
+    "Fat": 7
+  },
+  {
+    "Id": 69,
+    "Name": "Chocolate Milk",
+    "PortionGrams": 240,
+    "Calories": 190,
+    "Protein": 8,
+    "Carbohydrates": 31,
+    "Fat": 5
+  },
+  {
+    "Id": 70,
+    "Name": "Coconut Chips",
+    "PortionGrams": 30,
+    "Calories": 185,
+    "Protein": 2,
+    "Carbohydrates": 7,
+    "Fat": 17
+  },
+  {
+    "Id": 71,
+    "Name": "Coconut Water",
+    "PortionGrams": 240,
+    "Calories": 46,
+    "Protein": 1.7,
+    "Carbohydrates": 9,
+    "Fat": 0.5
+  },
+  {
+    "Id": 72,
+    "Name": "Cod Fillet",
+    "PortionGrams": 150,
+    "Calories": 123,
+    "Protein": 27,
+    "Carbohydrates": 0,
+    "Fat": 1.1
+  },
+  {
+    "Id": 73,
+    "Name": "Coffee (black)",
+    "PortionGrams": 240,
+    "Calories": 2,
+    "Protein": 0.3,
+    "Carbohydrates": 0,
+    "Fat": 0
+  },
+  {
+    "Id": 74,
+    "Name": "Coffee with Cream",
+    "PortionGrams": 240,
+    "Calories": 80,
+    "Protein": 1,
+    "Carbohydrates": 6,
+    "Fat": 6
+  },
+  {
+    "Id": 75,
+    "Name": "Coffee with Milk",
+    "PortionGrams": 240,
+    "Calories": 50,
+    "Protein": 2,
+    "Carbohydrates": 5,
+    "Fat": 2
+  },
+  {
+    "Id": 76,
+    "Name": "Cola",
+    "PortionGrams": 330,
+    "Calories": 140,
+    "Protein": 0,
+    "Carbohydrates": 39,
+    "Fat": 0
+  },
+  {
+    "Id": 77,
+    "Name": "Corn",
+    "PortionGrams": 150,
+    "Calories": 144,
+    "Protein": 5,
+    "Carbohydrates": 31,
+    "Fat": 2.3
+  },
+  {
+    "Id": 78,
+    "Name": "Corn Tortilla Chips",
+    "PortionGrams": 30,
+    "Calories": 140,
+    "Protein": 2,
+    "Carbohydrates": 19,
+    "Fat": 6
+  },
+  {
+    "Id": 79,
+    "Name": "Cottage Cheese",
+    "PortionGrams": 200,
+    "Calories": 164,
+    "Protein": 28,
+    "Carbohydrates": 6,
+    "Fat": 2.3
+  },
+  {
+    "Id": 80,
+    "Name": "Crackers",
+    "PortionGrams": 30,
+    "Calories": 130,
+    "Protein": 3,
+    "Carbohydrates": 19,
+    "Fat": 5
+  },
+  {
+    "Id": 81,
+    "Name": "Crackers with Tuna",
+    "PortionGrams": 80,
+    "Calories": 170,
+    "Protein": 14,
+    "Carbohydrates": 14,
+    "Fat": 5
+  },
+  {
+    "Id": 82,
+    "Name": "Cream Cheese",
+    "PortionGrams": 30,
+    "Calories": 99,
+    "Protein": 1.7,
+    "Carbohydrates": 1.2,
+    "Fat": 9.8
+  },
+  {
+    "Id": 83,
+    "Name": "Croissant",
+    "PortionGrams": 57,
+    "Calories": 231,
+    "Protein": 5,
+    "Carbohydrates": 26,
+    "Fat": 12
+  },
+  {
+    "Id": 84,
+    "Name": "Cucumber Slices",
+    "PortionGrams": 100,
+    "Calories": 15,
+    "Protein": 0.7,
+    "Carbohydrates": 3.6,
+    "Fat": 0.1
+  },
+  {
+    "Id": 85,
+    "Name": "Dark Chocolate",
+    "PortionGrams": 30,
+    "Calories": 170,
+    "Protein": 2,
+    "Carbohydrates": 13,
+    "Fat": 12
+  },
+  {
+    "Id": 86,
+    "Name": "Dates",
+    "PortionGrams": 30,
+    "Calories": 83,
+    "Protein": 0.7,
+    "Carbohydrates": 22,
+    "Fat": 0.1
+  },
+  {
+    "Id": 87,
+    "Name": "Donut",
+    "PortionGrams": 60,
+    "Calories": 253,
+    "Protein": 3,
+    "Carbohydrates": 30,
+    "Fat": 14
+  },
+  {
+    "Id": 88,
+    "Name": "Dried Cranberries",
+    "PortionGrams": 30,
+    "Calories": 93,
+    "Protein": 0.1,
+    "Carbohydrates": 25,
+    "Fat": 0.1
+  },
+  {
+    "Id": 89,
+    "Name": "Dried Mango",
+    "PortionGrams": 40,
+    "Calories": 120,
+    "Protein": 0.8,
+    "Carbohydrates": 31,
+    "Fat": 0.2
+  },
+  {
+    "Id": 90,
+    "Name": "Duck Breast",
+    "PortionGrams": 150,
+    "Calories": 350,
+    "Protein": 28,
+    "Carbohydrates": 0,
+    "Fat": 26
+  },
+  {
+    "Id": 91,
+    "Name": "Edamame",
+    "PortionGrams": 100,
+    "Calories": 121,
+    "Protein": 11,
+    "Carbohydrates": 9,
+    "Fat": 5
+  },
+  {
+    "Id": 92,
+    "Name": "Egg Fried Rice",
+    "PortionGrams": 250,
+    "Calories": 400,
+    "Protein": 12,
+    "Carbohydrates": 60,
+    "Fat": 14
+  },
+  {
+    "Id": 93,
+    "Name": "Egg White Omelette",
+    "PortionGrams": 150,
+    "Calories": 120,
+    "Protein": 22,
+    "Carbohydrates": 2,
+    "Fat": 2
+  },
+  {
+    "Id": 94,
+    "Name": "Eggplant Parmigiana",
+    "PortionGrams": 250,
+    "Calories": 380,
+    "Protein": 14,
+    "Carbohydrates": 38,
+    "Fat": 20
+  },
+  {
+    "Id": 95,
+    "Name": "Energy Drink",
+    "PortionGrams": 250,
+    "Calories": 110,
+    "Protein": 0,
+    "Carbohydrates": 28,
+    "Fat": 0
+  },
+  {
+    "Id": 96,
+    "Name": "Espresso",
+    "PortionGrams": 30,
+    "Calories": 5,
+    "Protein": 0.3,
+    "Carbohydrates": 0.5,
+    "Fat": 0.1
+  },
+  {
+    "Id": 97,
+    "Name": "Falafel Wrap",
+    "PortionGrams": 200,
+    "Calories": 400,
+    "Protein": 14,
+    "Carbohydrates": 50,
+    "Fat": 16
+  },
+  {
+    "Id": 98,
+    "Name": "Fish Tacos",
+    "PortionGrams": 200,
+    "Calories": 360,
+    "Protein": 24,
+    "Carbohydrates": 36,
+    "Fat": 14
+  },
+  {
+    "Id": 99,
+    "Name": "Flaxseed Crackers",
+    "PortionGrams": 30,
+    "Calories": 140,
+    "Protein": 5,
+    "Carbohydrates": 10,
+    "Fat": 9
+  },
+  {
+    "Id": 100,
+    "Name": "French Toast",
+    "PortionGrams": 100,
+    "Calories": 229,
+    "Protein": 8,
+    "Carbohydrates": 27,
+    "Fat": 10
+  },
+  {
+    "Id": 101,
+    "Name": "Fried Chicken",
+    "PortionGrams": 150,
+    "Calories": 400,
+    "Protein": 30,
+    "Carbohydrates": 16,
+    "Fat": 24
+  },
+  {
+    "Id": 102,
+    "Name": "Frozen Yogurt",
+    "PortionGrams": 100,
+    "Calories": 127,
+    "Protein": 3,
+    "Carbohydrates": 24,
+    "Fat": 2
+  },
+  {
+    "Id": 103,
+    "Name": "Fruit Cup",
+    "PortionGrams": 150,
+    "Calories": 80,
+    "Protein": 1,
+    "Carbohydrates": 20,
+    "Fat": 0.2
+  },
+  {
+    "Id": 104,
+    "Name": "Fruit Juice",
+    "PortionGrams": 240,
+    "Calories": 120,
+    "Protein": 1,
+    "Carbohydrates": 29,
+    "Fat": 0
+  },
+  {
+    "Id": 105,
+    "Name": "Fruit Salad",
+    "PortionGrams": 150,
+    "Calories": 90,
+    "Protein": 1.5,
+    "Carbohydrates": 22,
+    "Fat": 0.5
+  },
+  {
+    "Id": 106,
+    "Name": "Fruit Yogurt",
+    "PortionGrams": 150,
+    "Calories": 140,
+    "Protein": 5,
+    "Carbohydrates": 26,
+    "Fat": 2
+  },
+  {
+    "Id": 107,
+    "Name": "Gelatin Dessert",
+    "PortionGrams": 100,
+    "Calories": 62,
+    "Protein": 1.6,
+    "Carbohydrates": 14,
+    "Fat": 0
+  },
+  {
+    "Id": 108,
+    "Name": "Granola",
+    "PortionGrams": 50,
+    "Calories": 224,
+    "Protein": 5,
+    "Carbohydrates": 32,
+    "Fat": 9
+  },
+  {
+    "Id": 109,
+    "Name": "Granola Bar",
+    "PortionGrams": 40,
+    "Calories": 190,
+    "Protein": 3,
+    "Carbohydrates": 28,
+    "Fat": 7
+  },
+  {
+    "Id": 110,
+    "Name": "Grapes",
+    "PortionGrams": 100,
+    "Calories": 69,
+    "Protein": 0.7,
+    "Carbohydrates": 18,
+    "Fat": 0.2
+  },
+  {
+    "Id": 111,
+    "Name": "Greek Salad",
+    "PortionGrams": 200,
+    "Calories": 180,
+    "Protein": 6,
+    "Carbohydrates": 12,
+    "Fat": 13
+  },
+  {
+    "Id": 112,
+    "Name": "Greek Yogurt",
+    "PortionGrams": 200,
+    "Calories": 130,
+    "Protein": 22,
+    "Carbohydrates": 8,
+    "Fat": 0.7
+  },
+  {
+    "Id": 113,
+    "Name": "Greek Yogurt with Honey",
+    "PortionGrams": 200,
+    "Calories": 180,
+    "Protein": 20,
+    "Carbohydrates": 22,
+    "Fat": 1
+  },
+  {
+    "Id": 114,
+    "Name": "Grilled Chicken",
+    "PortionGrams": 200,
+    "Calories": 330,
+    "Protein": 62,
+    "Carbohydrates": 0,
+    "Fat": 7.2
+  },
+  {
+    "Id": 115,
+    "Name": "Grilled Shrimp",
+    "PortionGrams": 150,
+    "Calories": 149,
+    "Protein": 36,
+    "Carbohydrates": 0.3,
+    "Fat": 0.5
+  },
+  {
+    "Id": 116,
+    "Name": "Grilled Swordfish",
+    "PortionGrams": 200,
+    "Calories": 280,
+    "Protein": 44,
+    "Carbohydrates": 0,
+    "Fat": 10
+  },
+  {
+    "Id": 117,
+    "Name": "Grilled Tilapia",
+    "PortionGrams": 200,
+    "Calories": 256,
+    "Protein": 52,
+    "Carbohydrates": 0,
+    "Fat": 5.4
+  },
+  {
+    "Id": 118,
+    "Name": "Grilled Vegetables",
+    "PortionGrams": 200,
+    "Calories": 100,
+    "Protein": 4,
+    "Carbohydrates": 18,
+    "Fat": 2
+  },
+  {
+    "Id": 119,
+    "Name": "Ground Beef (lean)",
+    "PortionGrams": 150,
+    "Calories": 323,
+    "Protein": 39,
+    "Carbohydrates": 0,
+    "Fat": 18
+  },
+  {
+    "Id": 120,
+    "Name": "Guacamole with Chips",
+    "PortionGrams": 100,
+    "Calories": 250,
+    "Protein": 3,
+    "Carbohydrates": 22,
+    "Fat": 17
+  },
+  {
+    "Id": 121,
+    "Name": "Ham and Egg Sandwich",
+    "PortionGrams": 150,
+    "Calories": 310,
+    "Protein": 18,
+    "Carbohydrates": 28,
+    "Fat": 13
+  },
+  {
+    "Id": 122,
+    "Name": "Hamburger",
+    "PortionGrams": 200,
+    "Calories": 540,
+    "Protein": 28,
+    "Carbohydrates": 44,
+    "Fat": 26
+  },
+  {
+    "Id": 123,
+    "Name": "Herbal Tea",
+    "PortionGrams": 240,
+    "Calories": 2,
+    "Protein": 0,
+    "Carbohydrates": 0.5,
+    "Fat": 0
+  },
+  {
+    "Id": 124,
+    "Name": "Honey",
+    "PortionGrams": 21,
+    "Calories": 64,
+    "Protein": 0.1,
+    "Carbohydrates": 17,
+    "Fat": 0
+  },
+  {
+    "Id": 125,
+    "Name": "Hot Dog",
+    "PortionGrams": 100,
+    "Calories": 290,
+    "Protein": 11,
+    "Carbohydrates": 22,
+    "Fat": 18
+  },
+  {
+    "Id": 126,
+    "Name": "Hummus",
+    "PortionGrams": 50,
+    "Calories": 100,
+    "Protein": 4.8,
+    "Carbohydrates": 10,
+    "Fat": 5
+  },
+  {
+    "Id": 127,
+    "Name": "Hummus with Carrots",
+    "PortionGrams": 100,
+    "Calories": 130,
+    "Protein": 5,
+    "Carbohydrates": 15,
+    "Fat": 6
+  },
+  {
+    "Id": 128,
+    "Name": "Iced Coffee",
+    "PortionGrams": 240,
+    "Calories": 70,
+    "Protein": 2,
+    "Carbohydrates": 9,
+    "Fat": 3
+  },
+  {
+    "Id": 129,
+    "Name": "Jam on Toast",
+    "PortionGrams": 60,
+    "Calories": 160,
+    "Protein": 2.5,
+    "Carbohydrates": 34,
+    "Fat": 1
+  },
+  {
+    "Id": 130,
+    "Name": "Keto Chicken Bowl",
+    "PortionGrams": 300,
+    "Calories": 480,
+    "Protein": 46,
+    "Carbohydrates": 8,
+    "Fat": 30
+  },
+  {
+    "Id": 131,
+    "Name": "Keto Fat Bombs",
+    "PortionGrams": 30,
+    "Calories": 150,
+    "Protein": 2,
+    "Carbohydrates": 1,
+    "Fat": 15
+  },
+  {
+    "Id": 132,
+    "Name": "Keto Pancakes",
+    "PortionGrams": 100,
+    "Calories": 210,
+    "Protein": 14,
+    "Carbohydrates": 4,
+    "Fat": 15
+  },
+  {
+    "Id": 133,
+    "Name": "Kiwi",
+    "PortionGrams": 100,
+    "Calories": 61,
+    "Protein": 1.1,
+    "Carbohydrates": 15,
+    "Fat": 0.5
+  },
+  {
+    "Id": 134,
+    "Name": "Lamb Chops",
+    "PortionGrams": 200,
+    "Calories": 490,
+    "Protein": 40,
+    "Carbohydrates": 0,
+    "Fat": 36
+  },
+  {
+    "Id": 135,
+    "Name": "Lamb Kebab",
+    "PortionGrams": 150,
+    "Calories": 340,
+    "Protein": 28,
+    "Carbohydrates": 8,
+    "Fat": 22
+  },
+  {
+    "Id": 136,
+    "Name": "Latte",
+    "PortionGrams": 240,
+    "Calories": 120,
+    "Protein": 6,
+    "Carbohydrates": 12,
+    "Fat": 5
+  },
+  {
+    "Id": 137,
+    "Name": "Lemonade",
+    "PortionGrams": 240,
+    "Calories": 100,
+    "Protein": 0,
+    "Carbohydrates": 26,
+    "Fat": 0
+  },
+  {
+    "Id": 138,
+    "Name": "Lentil Dal",
+    "PortionGrams": 300,
+    "Calories": 330,
+    "Protein": 22,
+    "Carbohydrates": 52,
+    "Fat": 4
+  },
+  {
+    "Id": 139,
+    "Name": "Lentil Soup",
+    "PortionGrams": 250,
+    "Calories": 230,
+    "Protein": 18,
+    "Carbohydrates": 40,
+    "Fat": 1
+  },
+  {
+    "Id": 140,
+    "Name": "Mac and Cheese",
+    "PortionGrams": 200,
+    "Calories": 440,
+    "Protein": 15,
+    "Carbohydrates": 56,
+    "Fat": 18
+  },
+  {
+    "Id": 141,
+    "Name": "Macadamia Nuts",
+    "PortionGrams": 30,
+    "Calories": 204,
+    "Protein": 2.2,
+    "Carbohydrates": 4,
+    "Fat": 21
+  },
+  {
+    "Id": 142,
+    "Name": "Mango",
+    "PortionGrams": 150,
+    "Calories": 99,
+    "Protein": 1.4,
+    "Carbohydrates": 25,
+    "Fat": 0.6
+  },
+  {
+    "Id": 143,
+    "Name": "Mashed Potato",
+    "PortionGrams": 200,
+    "Calories": 240,
+    "Protein": 4,
+    "Carbohydrates": 38,
+    "Fat": 8
+  },
+  {
+    "Id": 144,
+    "Name": "Matcha Latte",
+    "PortionGrams": 240,
+    "Calories": 110,
+    "Protein": 4,
+    "Carbohydrates": 14,
+    "Fat": 4
+  },
+  {
+    "Id": 145,
+    "Name": "Melon",
+    "PortionGrams": 150,
+    "Calories": 51,
+    "Protein": 1.2,
+    "Carbohydrates": 12,
+    "Fat": 0.3
+  },
+  {
+    "Id": 146,
+    "Name": "Milk (warm)",
+    "PortionGrams": 240,
+    "Calories": 149,
+    "Protein": 8,
+    "Carbohydrates": 12,
+    "Fat": 8
+  },
+  {
+    "Id": 147,
+    "Name": "Milk Tea",
+    "PortionGrams": 300,
+    "Calories": 120,
+    "Protein": 2,
+    "Carbohydrates": 22,
+    "Fat": 3
+  },
+  {
+    "Id": 148,
+    "Name": "Minestrone Soup",
+    "PortionGrams": 300,
+    "Calories": 160,
+    "Protein": 7,
+    "Carbohydrates": 28,
+    "Fat": 3
+  },
+  {
+    "Id": 149,
+    "Name": "Mini Sandwich",
+    "PortionGrams": 80,
+    "Calories": 190,
+    "Protein": 8,
+    "Carbohydrates": 24,
+    "Fat": 7
+  },
+  {
+    "Id": 150,
+    "Name": "Miso Soup",
+    "PortionGrams": 200,
+    "Calories": 40,
+    "Protein": 3,
+    "Carbohydrates": 5,
+    "Fat": 1
+  },
+  {
+    "Id": 151,
+    "Name": "Mixed Berries",
+    "PortionGrams": 100,
+    "Calories": 50,
+    "Protein": 1,
+    "Carbohydrates": 11,
+    "Fat": 0.5
+  },
+  {
+    "Id": 152,
+    "Name": "Mozzarella Sticks",
+    "PortionGrams": 60,
+    "Calories": 170,
+    "Protein": 10,
+    "Carbohydrates": 10,
+    "Fat": 10
+  },
+  {
+    "Id": 153,
+    "Name": "Muffin",
+    "PortionGrams": 57,
+    "Calories": 190,
+    "Protein": 3,
+    "Carbohydrates": 29,
+    "Fat": 7
+  },
+  {
+    "Id": 154,
+    "Name": "Mushroom Risotto",
+    "PortionGrams": 300,
+    "Calories": 420,
+    "Protein": 10,
+    "Carbohydrates": 66,
+    "Fat": 13
+  },
+  {
+    "Id": 155,
+    "Name": "Nachos",
+    "PortionGrams": 50,
+    "Calories": 240,
+    "Protein": 3,
+    "Carbohydrates": 30,
+    "Fat": 13
+  },
+  {
+    "Id": 156,
+    "Name": "Nut Mix",
+    "PortionGrams": 30,
+    "Calories": 180,
+    "Protein": 5,
+    "Carbohydrates": 7,
+    "Fat": 16
+  },
+  {
+    "Id": 157,
+    "Name": "Oat Cookie",
+    "PortionGrams": 30,
+    "Calories": 130,
+    "Protein": 2,
+    "Carbohydrates": 20,
+    "Fat": 5
+  },
+  {
+    "Id": 158,
+    "Name": "Oatmeal",
+    "PortionGrams": 100,
+    "Calories": 389,
+    "Protein": 17,
+    "Carbohydrates": 66,
+    "Fat": 7
+  },
+  {
+    "Id": 159,
+    "Name": "Olive Oil Dressing",
+    "PortionGrams": 15,
+    "Calories": 119,
+    "Protein": 0,
+    "Carbohydrates": 0,
+    "Fat": 14
+  },
+  {
+    "Id": 160,
+    "Name": "Olives",
+    "PortionGrams": 30,
+    "Calories": 42,
+    "Protein": 0.4,
+    "Carbohydrates": 1.1,
+    "Fat": 4
+  },
+  {
+    "Id": 161,
+    "Name": "Orange",
+    "PortionGrams": 130,
+    "Calories": 62,
+    "Protein": 1.2,
+    "Carbohydrates": 15,
+    "Fat": 0.2
+  },
+  {
+    "Id": 162,
+    "Name": "Orange Juice",
+    "PortionGrams": 240,
+    "Calories": 112,
+    "Protein": 1.7,
+    "Carbohydrates": 26,
+    "Fat": 0.5
+  },
+  {
+    "Id": 163,
+    "Name": "Overnight Oats",
+    "PortionGrams": 200,
+    "Calories": 310,
+    "Protein": 12,
+    "Carbohydrates": 50,
+    "Fat": 7
+  },
+  {
+    "Id": 164,
+    "Name": "Pancakes",
+    "PortionGrams": 100,
+    "Calories": 227,
+    "Protein": 6,
+    "Carbohydrates": 38,
+    "Fat": 6
+  },
+  {
+    "Id": 165,
+    "Name": "Pasta (cooked)",
+    "PortionGrams": 200,
+    "Calories": 316,
+    "Protein": 11,
+    "Carbohydrates": 62,
+    "Fat": 1.8
+  },
+  {
+    "Id": 166,
+    "Name": "Pasta Bolognese",
+    "PortionGrams": 300,
+    "Calories": 520,
+    "Protein": 28,
+    "Carbohydrates": 65,
+    "Fat": 16
+  },
+  {
+    "Id": 167,
+    "Name": "Pasta with Tomato Sauce",
+    "PortionGrams": 250,
+    "Calories": 350,
+    "Protein": 12,
+    "Carbohydrates": 66,
+    "Fat": 4
+  },
+  {
+    "Id": 168,
+    "Name": "Peach",
+    "PortionGrams": 150,
+    "Calories": 59,
+    "Protein": 1.4,
+    "Carbohydrates": 14,
+    "Fat": 0.4
+  },
+  {
+    "Id": 169,
+    "Name": "Peanut Butter",
+    "PortionGrams": 32,
+    "Calories": 190,
+    "Protein": 8,
+    "Carbohydrates": 6,
+    "Fat": 16
+  },
+  {
+    "Id": 170,
+    "Name": "Peanuts",
+    "PortionGrams": 30,
+    "Calories": 170,
+    "Protein": 8,
+    "Carbohydrates": 5,
+    "Fat": 14
+  },
+  {
+    "Id": 171,
+    "Name": "Pear",
+    "PortionGrams": 178,
+    "Calories": 101,
+    "Protein": 0.6,
+    "Carbohydrates": 27,
+    "Fat": 0.2
+  },
+  {
+    "Id": 172,
+    "Name": "Peas",
+    "PortionGrams": 150,
+    "Calories": 122,
+    "Protein": 8,
+    "Carbohydrates": 21,
+    "Fat": 0.6
+  },
+  {
+    "Id": 173,
+    "Name": "Penne Arrabbiata",
+    "PortionGrams": 300,
+    "Calories": 380,
+    "Protein": 13,
+    "Carbohydrates": 72,
+    "Fat": 5
+  },
+  {
+    "Id": 174,
+    "Name": "Pineapple",
+    "PortionGrams": 100,
+    "Calories": 50,
+    "Protein": 0.5,
+    "Carbohydrates": 13,
+    "Fat": 0.1
+  },
+  {
+    "Id": 175,
+    "Name": "Pistachios",
+    "PortionGrams": 30,
+    "Calories": 160,
+    "Protein": 6,
+    "Carbohydrates": 8,
+    "Fat": 13
+  },
+  {
+    "Id": 176,
+    "Name": "Pita Bread",
+    "PortionGrams": 60,
+    "Calories": 165,
+    "Protein": 5.5,
+    "Carbohydrates": 33,
+    "Fat": 0.7
+  },
+  {
+    "Id": 177,
+    "Name": "Pizza Slice",
+    "PortionGrams": 107,
+    "Calories": 285,
+    "Protein": 12,
+    "Carbohydrates": 36,
+    "Fat": 10
+  },
+  {
+    "Id": 178,
+    "Name": "Popcorn",
+    "PortionGrams": 30,
+    "Calories": 110,
+    "Protein": 3,
+    "Carbohydrates": 21,
+    "Fat": 2
+  },
+  {
+    "Id": 179,
+    "Name": "Pork Chop",
+    "PortionGrams": 150,
+    "Calories": 310,
+    "Protein": 32,
+    "Carbohydrates": 0,
+    "Fat": 20
+  },
+  {
+    "Id": 180,
+    "Name": "Pork Tenderloin",
+    "PortionGrams": 200,
+    "Calories": 376,
+    "Protein": 46,
+    "Carbohydrates": 0,
+    "Fat": 20
+  },
+  {
+    "Id": 181,
+    "Name": "Potato (boiled)",
+    "PortionGrams": 150,
+    "Calories": 130,
+    "Protein": 3,
+    "Carbohydrates": 30,
+    "Fat": 0.1
+  },
+  {
+    "Id": 182,
+    "Name": "Prawn Stir Fry",
+    "PortionGrams": 250,
+    "Calories": 260,
+    "Protein": 28,
+    "Carbohydrates": 16,
+    "Fat": 10
+  },
+  {
+    "Id": 183,
+    "Name": "Pretzels",
+    "PortionGrams": 30,
+    "Calories": 115,
+    "Protein": 3,
+    "Carbohydrates": 24,
+    "Fat": 1
+  },
+  {
+    "Id": 184,
+    "Name": "Protein Bar",
+    "PortionGrams": 60,
+    "Calories": 200,
+    "Protein": 20,
+    "Carbohydrates": 22,
+    "Fat": 5
+  },
+  {
+    "Id": 185,
+    "Name": "Protein Cookie",
+    "PortionGrams": 50,
+    "Calories": 180,
+    "Protein": 15,
+    "Carbohydrates": 18,
+    "Fat": 5
+  },
+  {
+    "Id": 186,
+    "Name": "Protein Pudding",
+    "PortionGrams": 150,
+    "Calories": 130,
+    "Protein": 18,
+    "Carbohydrates": 10,
+    "Fat": 2
+  },
+  {
+    "Id": 187,
+    "Name": "Protein Shake",
+    "PortionGrams": 300,
+    "Calories": 160,
+    "Protein": 25,
+    "Carbohydrates": 8,
+    "Fat": 3
+  },
+  {
+    "Id": 188,
+    "Name": "Pumpkin Seeds",
+    "PortionGrams": 30,
+    "Calories": 163,
+    "Protein": 8.5,
+    "Carbohydrates": 4,
+    "Fat": 14
+  },
+  {
+    "Id": 189,
+    "Name": "Quinoa",
+    "PortionGrams": 150,
+    "Calories": 333,
+    "Protein": 12,
+    "Carbohydrates": 58,
+    "Fat": 5.3
+  },
+  {
+    "Id": 190,
+    "Name": "Raisins",
+    "PortionGrams": 30,
+    "Calories": 90,
+    "Protein": 0.9,
+    "Carbohydrates": 22,
+    "Fat": 0.1
+  },
+  {
+    "Id": 191,
+    "Name": "Rice Cake",
+    "PortionGrams": 20,
+    "Calories": 70,
+    "Protein": 1.5,
+    "Carbohydrates": 15,
+    "Fat": 0.5
+  },
+  {
+    "Id": 192,
+    "Name": "Rice Pudding",
+    "PortionGrams": 150,
+    "Calories": 180,
+    "Protein": 4,
+    "Carbohydrates": 34,
+    "Fat": 3
+  },
+  {
+    "Id": 193,
+    "Name": "Ricotta Toast",
+    "PortionGrams": 100,
+    "Calories": 210,
+    "Protein": 10,
+    "Carbohydrates": 22,
+    "Fat": 9
+  },
+  {
+    "Id": 194,
+    "Name": "Roast Chicken",
+    "PortionGrams": 200,
+    "Calories": 340,
+    "Protein": 48,
+    "Carbohydrates": 0,
+    "Fat": 16
+  },
+  {
+    "Id": 195,
+    "Name": "Roasted Vegetables",
+    "PortionGrams": 200,
+    "Calories": 140,
+    "Protein": 4,
+    "Carbohydrates": 22,
+    "Fat": 5
+  },
+  {
+    "Id": 196,
+    "Name": "Salmon",
+    "PortionGrams": 150,
+    "Calories": 312,
+    "Protein": 30,
+    "Carbohydrates": 0,
+    "Fat": 19.5
+  },
+  {
+    "Id": 197,
+    "Name": "Salmon with Asparagus",
+    "PortionGrams": 250,
+    "Calories": 380,
+    "Protein": 38,
+    "Carbohydrates": 8,
+    "Fat": 22
+  },
+  {
+    "Id": 198,
+    "Name": "Sausage",
+    "PortionGrams": 50,
+    "Calories": 170,
+    "Protein": 7,
+    "Carbohydrates": 1,
+    "Fat": 15
+  },
+  {
+    "Id": 199,
+    "Name": "Sauteed Spinach",
+    "PortionGrams": 150,
+    "Calories": 80,
+    "Protein": 5,
+    "Carbohydrates": 6,
+    "Fat": 5
+  },
+  {
+    "Id": 200,
+    "Name": "Scrambled Eggs",
+    "PortionGrams": 100,
+    "Calories": 149,
+    "Protein": 10,
+    "Carbohydrates": 1.6,
+    "Fat": 11
+  },
+  {
+    "Id": 201,
+    "Name": "Shrimp Stir Fry",
+    "PortionGrams": 250,
+    "Calories": 280,
+    "Protein": 30,
+    "Carbohydrates": 18,
+    "Fat": 10
+  },
+  {
+    "Id": 202,
+    "Name": "Skim Milk",
+    "PortionGrams": 240,
+    "Calories": 83,
+    "Protein": 8,
+    "Carbohydrates": 12,
+    "Fat": 0.2
+  },
+  {
+    "Id": 203,
+    "Name": "Smoothie (fruit)",
+    "PortionGrams": 300,
+    "Calories": 180,
+    "Protein": 3,
+    "Carbohydrates": 40,
+    "Fat": 1
+  },
+  {
+    "Id": 204,
+    "Name": "Smoothie (green)",
+    "PortionGrams": 300,
+    "Calories": 140,
+    "Protein": 4,
+    "Carbohydrates": 28,
+    "Fat": 2
+  },
+  {
+    "Id": 205,
+    "Name": "Sorbet",
+    "PortionGrams": 100,
+    "Calories": 120,
+    "Protein": 0.5,
+    "Carbohydrates": 30,
+    "Fat": 0.1
+  },
+  {
+    "Id": 206,
+    "Name": "Spaghetti Carbonara",
+    "PortionGrams": 300,
+    "Calories": 560,
+    "Protein": 22,
+    "Carbohydrates": 64,
+    "Fat": 24
+  },
+  {
+    "Id": 207,
+    "Name": "Sparkling Water",
+    "PortionGrams": 330,
+    "Calories": 0,
+    "Protein": 0,
+    "Carbohydrates": 0,
+    "Fat": 0
+  },
+  {
+    "Id": 208,
+    "Name": "Spinach and Ricotta Pasta",
+    "PortionGrams": 300,
+    "Calories": 480,
+    "Protein": 20,
+    "Carbohydrates": 64,
+    "Fat": 16
+  },
+  {
+    "Id": 209,
+    "Name": "Spinach Salad",
+    "PortionGrams": 150,
+    "Calories": 35,
+    "Protein": 4.4,
+    "Carbohydrates": 5.4,
+    "Fat": 0.6
+  },
+  {
+    "Id": 210,
+    "Name": "Strawberries",
+    "PortionGrams": 100,
+    "Calories": 32,
+    "Protein": 0.7,
+    "Carbohydrates": 7.7,
+    "Fat": 0.3
+  },
+  {
+    "Id": 211,
+    "Name": "Stuffed Peppers",
+    "PortionGrams": 250,
+    "Calories": 340,
+    "Protein": 20,
+    "Carbohydrates": 34,
+    "Fat": 14
+  },
+  {
+    "Id": 212,
+    "Name": "Sunflower Seeds",
+    "PortionGrams": 30,
+    "Calories": 175,
+    "Protein": 5.5,
+    "Carbohydrates": 6,
+    "Fat": 15
+  },
+  {
+    "Id": 213,
+    "Name": "Sushi Roll",
+    "PortionGrams": 150,
+    "Calories": 250,
+    "Protein": 9,
+    "Carbohydrates": 44,
+    "Fat": 5
+  },
+  {
+    "Id": 214,
+    "Name": "Sweet Potato",
+    "PortionGrams": 150,
+    "Calories": 129,
+    "Protein": 2.3,
+    "Carbohydrates": 30,
+    "Fat": 0.1
+  },
+  {
+    "Id": 215,
+    "Name": "Tea with Milk",
+    "PortionGrams": 240,
+    "Calories": 40,
+    "Protein": 1.5,
+    "Carbohydrates": 5,
+    "Fat": 1.5
+  },
+  {
+    "Id": 216,
+    "Name": "Tiramisu",
+    "PortionGrams": 100,
+    "Calories": 240,
+    "Protein": 4,
+    "Carbohydrates": 28,
+    "Fat": 12
+  },
+  {
+    "Id": 217,
+    "Name": "Tofu Cubes",
+    "PortionGrams": 100,
+    "Calories": 76,
+    "Protein": 8,
+    "Carbohydrates": 1.9,
+    "Fat": 4.8
+  },
+  {
+    "Id": 218,
+    "Name": "Tofu Scramble",
+    "PortionGrams": 150,
+    "Calories": 140,
+    "Protein": 12,
+    "Carbohydrates": 5,
+    "Fat": 8
+  },
+  {
+    "Id": 219,
+    "Name": "Tofu Stir Fry",
+    "PortionGrams": 250,
+    "Calories": 280,
+    "Protein": 18,
+    "Carbohydrates": 22,
+    "Fat": 14
+  },
+  {
+    "Id": 220,
+    "Name": "Tomato Soup",
+    "PortionGrams": 250,
+    "Calories": 90,
+    "Protein": 2,
+    "Carbohydrates": 18,
+    "Fat": 1
+  },
+  {
+    "Id": 221,
+    "Name": "Trail Mix",
+    "PortionGrams": 40,
+    "Calories": 195,
+    "Protein": 5,
+    "Carbohydrates": 20,
+    "Fat": 12
+  },
+  {
+    "Id": 222,
+    "Name": "Tuna (canned)",
+    "PortionGrams": 100,
+    "Calories": 116,
+    "Protein": 26,
+    "Carbohydrates": 0,
+    "Fat": 1
+  },
+  {
+    "Id": 223,
+    "Name": "Tuna Salad",
+    "PortionGrams": 200,
+    "Calories": 290,
+    "Protein": 28,
+    "Carbohydrates": 8,
+    "Fat": 16
+  },
+  {
+    "Id": 224,
+    "Name": "Tuna Steak",
+    "PortionGrams": 200,
+    "Calories": 280,
+    "Protein": 50,
+    "Carbohydrates": 0,
+    "Fat": 8
+  },
+  {
+    "Id": 225,
+    "Name": "Turkey Breast",
+    "PortionGrams": 150,
+    "Calories": 203,
+    "Protein": 45,
+    "Carbohydrates": 0,
+    "Fat": 1.5
+  },
+  {
+    "Id": 226,
+    "Name": "Turkey Meatballs",
+    "PortionGrams": 200,
+    "Calories": 310,
+    "Protein": 34,
+    "Carbohydrates": 10,
+    "Fat": 15
+  },
+  {
+    "Id": 227,
+    "Name": "Tzatziki with Pita",
+    "PortionGrams": 100,
+    "Calories": 200,
+    "Protein": 6,
+    "Carbohydrates": 24,
+    "Fat": 9
+  },
+  {
+    "Id": 228,
+    "Name": "Vanilla Ice Cream",
+    "PortionGrams": 100,
+    "Calories": 207,
+    "Protein": 3.5,
+    "Carbohydrates": 24,
+    "Fat": 11
+  },
+  {
+    "Id": 229,
+    "Name": "Veggie Burger",
+    "PortionGrams": 180,
+    "Calories": 360,
+    "Protein": 16,
+    "Carbohydrates": 44,
+    "Fat": 14
+  },
+  {
+    "Id": 230,
+    "Name": "Veggie Chips",
+    "PortionGrams": 30,
+    "Calories": 130,
+    "Protein": 1.5,
+    "Carbohydrates": 18,
+    "Fat": 6
+  },
+  {
+    "Id": 231,
+    "Name": "Veggie Sticks",
+    "PortionGrams": 100,
+    "Calories": 45,
+    "Protein": 2,
+    "Carbohydrates": 9,
+    "Fat": 0.3
+  },
+  {
+    "Id": 232,
+    "Name": "Veggie Wrap",
+    "PortionGrams": 200,
+    "Calories": 320,
+    "Protein": 10,
+    "Carbohydrates": 48,
+    "Fat": 10
+  },
+  {
+    "Id": 233,
+    "Name": "Vegetable Curry",
+    "PortionGrams": 250,
+    "Calories": 280,
+    "Protein": 8,
+    "Carbohydrates": 38,
+    "Fat": 12
+  },
+  {
+    "Id": 234,
+    "Name": "Vegetable Soup",
+    "PortionGrams": 300,
+    "Calories": 120,
+    "Protein": 5,
+    "Carbohydrates": 22,
+    "Fat": 2
+  },
+  {
+    "Id": 235,
+    "Name": "Vegetable Stew",
+    "PortionGrams": 300,
+    "Calories": 210,
+    "Protein": 7,
+    "Carbohydrates": 38,
+    "Fat": 4
+  },
+  {
+    "Id": 236,
+    "Name": "Vegetarian Lasagna",
+    "PortionGrams": 300,
+    "Calories": 420,
+    "Protein": 18,
+    "Carbohydrates": 55,
+    "Fat": 15
+  },
+  {
+    "Id": 237,
+    "Name": "Veggie Stir Fry with Tofu",
+    "PortionGrams": 300,
+    "Calories": 320,
+    "Protein": 18,
+    "Carbohydrates": 28,
+    "Fat": 16
+  },
+  {
+    "Id": 238,
+    "Name": "Waffle",
+    "PortionGrams": 75,
+    "Calories": 218,
+    "Protein": 5,
+    "Carbohydrates": 33,
+    "Fat": 8
+  },
+  {
+    "Id": 239,
+    "Name": "Walnuts",
+    "PortionGrams": 30,
+    "Calories": 185,
+    "Protein": 4.3,
+    "Carbohydrates": 3.9,
+    "Fat": 18
+  },
+  {
+    "Id": 240,
+    "Name": "Watermelon",
+    "PortionGrams": 200,
+    "Calories": 60,
+    "Protein": 1.2,
+    "Carbohydrates": 15,
+    "Fat": 0.3
+  },
+  {
+    "Id": 241,
+    "Name": "Whey Protein",
+    "PortionGrams": 30,
+    "Calories": 120,
+    "Protein": 24,
+    "Carbohydrates": 3,
+    "Fat": 1.5
+  },
+  {
+    "Id": 242,
+    "Name": "Whipped Cream",
+    "PortionGrams": 30,
+    "Calories": 77,
+    "Protein": 0.6,
+    "Carbohydrates": 3.4,
+    "Fat": 7
+  },
+  {
+    "Id": 243,
+    "Name": "White Bread",
+    "PortionGrams": 30,
+    "Calories": 80,
+    "Protein": 2.7,
+    "Carbohydrates": 15,
+    "Fat": 1
+  },
+  {
+    "Id": 244,
+    "Name": "White Rice",
+    "PortionGrams": 150,
+    "Calories": 309,
+    "Protein": 6.4,
+    "Carbohydrates": 67,
+    "Fat": 0.6
+  },
+  {
+    "Id": 245,
+    "Name": "Whole Egg",
+    "PortionGrams": 60,
+    "Calories": 78,
+    "Protein": 6,
+    "Carbohydrates": 0.6,
+    "Fat": 5
+  },
+  {
+    "Id": 246,
+    "Name": "Whole Milk",
+    "PortionGrams": 240,
+    "Calories": 149,
+    "Protein": 8,
+    "Carbohydrates": 12,
+    "Fat": 8
+  },
+  {
+    "Id": 247,
+    "Name": "Whole Wheat Bread",
+    "PortionGrams": 30,
+    "Calories": 80,
+    "Protein": 4,
+    "Carbohydrates": 15,
+    "Fat": 1
+  },
+  {
+    "Id": 248,
+    "Name": "Zucchini Noodles",
+    "PortionGrams": 200,
+    "Calories": 66,
+    "Protein": 4.8,
+    "Carbohydrates": 12,
+    "Fat": 1.2
+  },
+  {
+    "Id": 249,
+    "Name": "Chia Pudding with Berries",
+    "PortionGrams": 180,
+    "Calories": 200,
+    "Protein": 7,
+    "Carbohydrates": 26,
+    "Fat": 9
+  },
+  {
+    "Id": 250,
+    "Name": "Egg White Scramble",
+    "PortionGrams": 150,
+    "Calories": 110,
+    "Protein": 20,
+    "Carbohydrates": 2,
+    "Fat": 2
+  }
+]
