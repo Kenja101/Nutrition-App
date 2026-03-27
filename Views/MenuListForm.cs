@@ -8,131 +8,120 @@ using MenuItem = NutritionApp.Models.MenuItem;
 
 namespace NutritionApp.Views
 {
-    public partial class MenuEditForm : Form
+    public partial class MenuListForm : Form
     {
         private User currentUser;
-        private Menu menu;
         private MenuController menuCtrl = new MenuController();
-        private FoodController foodCtrl = new FoodController();
-        private List<FoodProduct> foods;
-        private bool isNew = false;
+        private List<Menu> menus;
 
-        public MenuEditForm(User user, Menu existingMenu)
+        public MenuListForm(User user)
         {
             InitializeComponent();
             currentUser = user;
-
-            if (existingMenu == null)
-            {
-                isNew = true;
-                menu = new Menu();
-                menu.UserId = user.Id;
-                menu.Date = DateTime.Today;
-                menu.Items = new List<MenuItem>();
-                menu.MealTime = "Breakfast";
-            }
-            else
-            {
-                menu = existingMenu;
-            }
-
-            LoadFoods();
-            LoadForm();
-            RefreshList();
+            LoadMenus();
         }
 
-        private void LoadFoods()
+        private void LoadMenus()
         {
-            foods = foodCtrl.GetAllFoods();
-            cmbFood.Items.Clear();
-            foreach (FoodProduct f in foods)
+            menus = menuCtrl.GetMenusByUser(currentUser.Id);
+            lstMenus.Items.Clear();
+
+            foreach (Menu m in menus)
             {
-                cmbFood.Items.Add(f.Name);
+                string line = m.Date.ToString("dd/MM/yyyy") + " | " + m.MealTime + " | " + m.Name + " | " + Math.Round(m.TotalCalories, 1) + " kcal";
+                lstMenus.Items.Add(line);
             }
-            if (cmbFood.Items.Count > 0)
-                cmbFood.SelectedIndex = 0;
+
+            ClearDetails();
         }
 
-        private void LoadForm()
+        private void lstMenus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtName.Text = menu.Name;
-            dtpDate.Value = menu.Date;
-            cmbMealTime.SelectedItem = menu.MealTime;
-            if (cmbMealTime.SelectedIndex < 0)
-                cmbMealTime.SelectedIndex = 0;
-        }
+            int index = lstMenus.SelectedIndex;
+            if (index < 0) return;
 
-        private void RefreshList()
-        {
+            Menu selected = menus[index];
+
+            lblDetailName.Text = "Name: " + selected.Name;
+            lblDetailDate.Text = "Date: " + selected.Date.ToString("dd/MM/yyyy");
+            lblDetailMealTime.Text = "Meal: " + selected.MealTime;
+            lblDetailCalories.Text = "Calories: " + Math.Round(selected.TotalCalories, 1) + " kcal";
+            lblDetailProtein.Text = "Protein: " + Math.Round(selected.TotalProtein, 1) + " g";
+            lblDetailCarbs.Text = "Carbs: " + Math.Round(selected.TotalCarbohydrates, 1) + " g";
+            lblDetailFat.Text = "Fat: " + Math.Round(selected.TotalFat, 1) + " g";
+
             lstItems.Items.Clear();
-            foreach (MenuItem item in menu.Items)
+            foreach (MenuItem item in selected.Items)
             {
                 lstItems.Items.Add(item.FoodName + " - " + item.PortionGrams + "g - " + Math.Round(item.Calories, 1) + " kcal");
             }
-
-            menuCtrl.CalculateTotals(menu);
-            lblCalories.Text = "Calories: " + Math.Round(menu.TotalCalories, 1) + " kcal";
-            lblProtein.Text = "Protein: " + Math.Round(menu.TotalProtein, 1) + " g";
-            lblCarbs.Text = "Carbs: " + Math.Round(menu.TotalCarbohydrates, 1) + " g";
-            lblFat.Text = "Fat: " + Math.Round(menu.TotalFat, 1) + " g";
         }
 
-        private void btnAddFood_Click(object sender, EventArgs e)
+        private void btnCreate_Click(object sender, EventArgs e)
         {
-            int index = cmbFood.SelectedIndex;
-            if (index < 0) return;
-
-            FoodProduct food = foods[index];
-
-            MenuItem newItem = new MenuItem();
-            newItem.FoodProductId = food.Id;
-            newItem.FoodName = food.Name;
-            newItem.PortionGrams = food.PortionGrams;
-            newItem.Calories = food.Calories;
-            newItem.Protein = food.Protein;
-            newItem.Carbohydrates = food.Carbohydrates;
-            newItem.Fat = food.Fat;
-
-            menu.Items.Add(newItem);
-            RefreshList();
+            MenuEditForm editForm = new MenuEditForm(currentUser, null);
+            editForm.ShowDialog();
+            LoadMenus();
         }
 
-        private void btnRemoveFood_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            int index = lstItems.SelectedIndex;
+            int index = lstMenus.SelectedIndex;
             if (index < 0)
             {
-                MessageBox.Show("Select a food to remove.");
+                MessageBox.Show("Please select a menu first.");
                 return;
             }
 
-            menu.Items.RemoveAt(index);
-            RefreshList();
+            Menu selected = menus[index];
+            MenuEditForm editForm = new MenuEditForm(currentUser, selected);
+            editForm.ShowDialog();
+            LoadMenus();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim() == "")
+            int index = lstMenus.SelectedIndex;
+            if (index < 0)
             {
-                MessageBox.Show("Please enter a name.");
+                MessageBox.Show("Please select a menu first.");
                 return;
             }
 
-            menu.Name = txtName.Text.Trim();
-            menu.Date = dtpDate.Value;
-            menu.MealTime = cmbMealTime.SelectedItem.ToString();
+            Menu selected = menus[index];
+            DialogResult result = MessageBox.Show("Delete '" + selected.Name + "'?", "Confirm", MessageBoxButtons.YesNo);
 
-            if (isNew)
-                menuCtrl.CreateMenu(menu);
-            else
-                menuCtrl.UpdateMenu(menu);
+            if (result == DialogResult.Yes)
+            {
+                menuCtrl.DeleteMenu(selected.Id);
+                LoadMenus();
+            }
+        }
 
+        private void btnSuggested_Click(object sender, EventArgs e)
+        {
+            SuggestedMenusForm suggestedForm = new SuggestedMenusForm(currentUser);
+            suggestedForm.ShowDialog();
+            LoadMenus();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            DashboardForm dashboard = new DashboardForm(currentUser);
+            dashboard.Show();
             this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void ClearDetails()
         {
-            this.Close();
+            lblDetailName.Text = "Name: -";
+            lblDetailDate.Text = "Date: -";
+            lblDetailMealTime.Text = "Meal: -";
+            lblDetailCalories.Text = "Calories: -";
+            lblDetailProtein.Text = "Protein: -";
+            lblDetailCarbs.Text = "Carbs: -";
+            lblDetailFat.Text = "Fat: -";
+            lstItems.Items.Clear();
         }
     }
 }
