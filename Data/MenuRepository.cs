@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using NutritionApp.Models;
 using Menu = NutritionApp.Models.Menu;
@@ -20,11 +19,10 @@ namespace NutritionApp.Data
                 string text = File.ReadAllText(DataPaths.MenusFile);
                 return JsonConvert.DeserializeObject<List<Menu>>(text);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading menus: " + ex.Message);
-                return new List<Menu>();
-            }
+     catch (Exception ex)
+    {
+        throw new Exception("Error loading menu: " + ex.Message);
+    }
         }
 
         public void SaveAll(List<Menu> menus)
@@ -34,10 +32,10 @@ namespace NutritionApp.Data
                 string text = JsonConvert.SerializeObject(menus, Formatting.Indented);
                 File.WriteAllText(DataPaths.MenusFile, text);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error saving menus: " + ex.Message);
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error saving menu: " + ex.Message);
+    }
         }
     }
 }

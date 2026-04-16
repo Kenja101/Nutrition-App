@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using NutritionApp.Data;
 using NutritionApp.Models;
 using Menu = NutritionApp.Models.Menu;
@@ -25,11 +24,10 @@ namespace NutritionApp.Controllers
                 }
                 return result;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading menus: " + ex.Message);
-                return new List<Menu>();
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error loading menus: " + ex.Message);
+    }
         }
 
         public void CreateMenu(Menu menu)
@@ -50,10 +48,10 @@ namespace NutritionApp.Controllers
                 all.Add(menu);
                 repo.SaveAll(all);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error creating menu: " + ex.Message);
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error creating menu: " + ex.Message);
+    }
         }
 
         public void UpdateMenu(Menu updatedMenu)
@@ -72,10 +70,10 @@ namespace NutritionApp.Controllers
                 }
                 repo.SaveAll(all);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error updating menu: " + ex.Message);
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error updating menu: " + ex.Message);
+    }
         }
 
         public void DeleteMenu(int menuId)
@@ -98,10 +96,10 @@ namespace NutritionApp.Controllers
                     repo.SaveAll(all);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error deleting menu: " + ex.Message);
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error deleting menu: " + ex.Message);
+    }
         }
 
         public void CalculateTotals(Menu menu)

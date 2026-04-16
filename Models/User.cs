@@ -12,5 +12,6 @@ namespace NutritionApp.Models
         public string ActivityLevel { get; set; }
         public string Goal { get; set; }
         public string DietType { get; set; }
+        public string Role { get; set; }
     }
 }

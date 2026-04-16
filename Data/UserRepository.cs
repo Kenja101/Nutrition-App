@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using NutritionApp.Models;
 
@@ -19,11 +18,10 @@ namespace NutritionApp.Data
                 string text = File.ReadAllText(DataPaths.UsersFile);
                 return JsonConvert.DeserializeObject<List<User>>(text);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading users: " + ex.Message);
-                return new List<User>();
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error loading users: " + ex.Message);
+    }
         }
 
         public void SaveAll(List<User> users)
@@ -33,10 +31,10 @@ namespace NutritionApp.Data
                 string text = JsonConvert.SerializeObject(users, Formatting.Indented);
                 File.WriteAllText(DataPaths.UsersFile, text);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error saving users: " + ex.Message);
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Error saving users: " + ex.Message);
+    }
         }
     }
 }

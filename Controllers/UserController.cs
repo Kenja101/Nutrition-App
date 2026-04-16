@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using NutritionApp.Data;
 using NutritionApp.Models;
 
@@ -22,11 +21,10 @@ namespace NutritionApp.Controllers
                 }
                 return null;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Login error: " + ex.Message);
-                return null;
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Loading error: " + ex.Message);
+    }
         }
 
         public bool Register(User newUser)
@@ -52,11 +50,10 @@ namespace NutritionApp.Controllers
                 repo.SaveAll(users);
                 return true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Register error: " + ex.Message);
-                return false;
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Register error: " + ex.Message);
+    }
         }
 
         public void UpdateUser(User updatedUser)
@@ -74,10 +71,10 @@ namespace NutritionApp.Controllers
                 }
                 repo.SaveAll(users);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Update error: " + ex.Message);
-            }
+    catch (Exception ex)
+    {
+        throw new Exception("Update error: " + ex.Message);
+    }
         }
 
         public User GetById(int id)
