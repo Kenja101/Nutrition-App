@@ -1,0 +1,65 @@
+@page "/login"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<h3>Login</h3>
+
+<div>
+    <label>Email:</label>
+    <input type="text" @bind="email" />
+</div>
+
+<div>
+    <label>Password:</label>
+    <input type="password" @bind="password" />
+</div>
+
+<div>
+    <button @onclick="DoLogin">Login</button>
+</div>
+
+@if (errorMessage != "")
+{
+    <p style="color:red;">@errorMessage</p>
+}
+
+@code {
+    private string email = "";
+    private string password = "";
+    private string errorMessage = "";
+
+    private UserController userCtrl = new UserController();
+
+    // intenta hacer login y redirige segun el rol
+    private void DoLogin()
+    {
+        if (email == "" || password == "")
+        {
+            errorMessage = "Please enter email and password.";
+            return;
+        }
+
+        User user = userCtrl.Login(email, password);
+
+        if (user == null)
+        {
+            errorMessage = "Email or password is wrong.";
+            return;
+        }
+
+        Session.CurrentUser = user;
+
+        if (user.Role == "Admin")
+        {
+            Nav.NavigateTo("/admin");
+        }
+        else
+        {
+            Nav.NavigateTo("/dashboard");
+        }
+    }
+}

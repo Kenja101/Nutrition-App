@@ -1,0 +1,124 @@
+@page "/editprofile"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Edit Profile</h3>
+
+    <div>
+        <label>Full Name:</label>
+        <input type="text" @bind="fullName" />
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input type="text" @bind="email" />
+    </div>
+
+    <div>
+        <label>Age:</label>
+        <input type="number" @bind="age" />
+    </div>
+
+    <div>
+        <label>Weight (kg):</label>
+        <input type="number" @bind="weight" />
+    </div>
+
+    <div>
+        <label>Height (cm):</label>
+        <input type="number" @bind="height" />
+    </div>
+
+    <div>
+        <label>Activity Level:</label>
+        <select @bind="activityLevel">
+            <option value="Sedentary">Sedentary</option>
+            <option value="Light">Light</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Active">Active</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Goal:</label>
+        <select @bind="goal">
+            <option value="MaintainWeight">Maintain Weight</option>
+            <option value="LoseFat">Lose Fat</option>
+            <option value="GainMuscle">Gain Muscle</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Diet Type:</label>
+        <select @bind="dietType">
+            <option value="Standard">Standard</option>
+            <option value="Keto">Keto</option>
+            <option value="Vegetarian">Vegetarian</option>
+        </select>
+    </div>
+
+    <div>
+        <button @onclick="SaveChanges">Save Changes</button>
+        <button @onclick="GoBack">Back</button>
+    </div>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+</div>
+
+@code {
+    private string fullName = "";
+    private string email = "";
+    private int age = 0;
+    private double weight = 0;
+    private double height = 0;
+    private string activityLevel = "Sedentary";
+    private string goal = "MaintainWeight";
+    private string dietType = "Standard";
+    private string message = "";
+
+    private UserController userCtrl = new UserController();
+
+    // carga los datos del usuario al iniciar
+    protected override void OnInitialized()
+    {
+        User user = Session.CurrentUser;
+        fullName = user.FullName;
+        email = user.Email;
+        age = user.Age;
+        weight = user.Weight;
+        height = user.Height;
+        activityLevel = user.ActivityLevel;
+        goal = user.Goal;
+        dietType = user.DietType;
+    }
+
+    // guarda los cambios del perfil
+    private void SaveChanges()
+    {
+        User user = Session.CurrentUser;
+        user.FullName = fullName;
+        user.Email = email;
+        user.Age = age;
+        user.Weight = weight;
+        user.Height = height;
+        user.ActivityLevel = activityLevel;
+        user.Goal = goal;
+        user.DietType = dietType;
+
+        userCtrl.UpdateUser(user);
+        Session.CurrentUser = user;
+        message = "Profile updated successfully.";
+    }
+
+    private void GoBack() => Nav.NavigateTo("/dashboard");
+}

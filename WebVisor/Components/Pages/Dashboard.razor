@@ -1,0 +1,65 @@
+@page "/dashboard"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Dashboard</h3>
+
+    <p>Welcome, @user.FullName</p>
+    <p>Email: @user.Email</p>
+    <p>Age: @user.Age</p>
+    <p>Weight: @user.Weight kg</p>
+    <p>Height: @user.Height cm</p>
+    <p>Goal: @user.Goal</p>
+    <p>Diet: @user.DietType</p>
+    <p>Activity: @user.ActivityLevel</p>
+
+    <p>BMI: @bmi (@bmiCategory)</p>
+    <p>Maintenance Calories: @maintenance kcal</p>
+    <p>Daily Goal: @dailyCalories kcal</p>
+
+    <p>Protein: @macros.ProteinGrams g (@macros.ProteinCalories kcal)</p>
+    <p>Carbs: @macros.CarbGrams g (@macros.CarbCalories kcal)</p>
+    <p>Fat: @macros.FatGrams g (@macros.FatCalories kcal)</p>
+
+    <button @onclick="GoToMenus">My Menus</button>
+    <button @onclick="GoToStats">Statistics</button>
+    <button @onclick="GoToEditProfile">Edit Profile</button>
+    <button @onclick="Logout">Logout</button>
+    <button @onclick="GoToReports">Reports</button>
+
+</div>
+
+@code {
+    private User user = new User();
+    private NutritionService nutritionService = new NutritionService();
+    private double bmi;
+    private string bmiCategory = "";
+    private double maintenance;
+    private double dailyCalories;
+    private MacroDistribution macros = new MacroDistribution();
+    private void GoToReports() => Nav.NavigateTo("/reports");
+
+    // carga los datos del usuario al iniciar
+    protected override void OnInitialized()
+    {
+        user = Session.CurrentUser;
+
+        bmi = nutritionService.CalculateBMI(user.Weight, user.Height);
+        bmiCategory = nutritionService.GetBMICategory(bmi);
+        maintenance = nutritionService.CalculateMaintenanceCalories(user);
+        dailyCalories = nutritionService.CalculateDailyCalories(user);
+        macros = nutritionService.GetMacros(user, dailyCalories);
+    }
+
+    private void GoToMenus() => Nav.NavigateTo("/menus");
+    private void GoToStats() => Nav.NavigateTo("/statistics");
+    private void GoToEditProfile() => Nav.NavigateTo("/editprofile");
+    private void Logout() => Nav.NavigateTo("/");
+    
+}
