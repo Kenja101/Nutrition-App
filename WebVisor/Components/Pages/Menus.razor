@@ -1,0 +1,104 @@
+@page "/menus"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>My Menus</h3>
+
+    <button @onclick="GoToNewMenu">New Menu</button>
+    <button @onclick="GoToSuggested">Suggested Menus</button>
+    <button @onclick="GoBack">Back to Dashboard</button>
+
+    <br /><br />
+
+    @if (menus.Count == 0)
+    {
+        <p>No menus found.</p>
+    }
+    else
+    {
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>Date</th>
+                <th>Meal</th>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var menu in GetCurrentPage())
+            {
+                <tr>
+                    <td>@menu.Date.ToString("dd/MM/yyyy")</td>
+                    <td>@menu.MealTime</td>
+                    <td>@menu.Name</td>
+                    <td>@Math.Round(menu.TotalCalories, 1) kcal</td>
+                    <td>
+                        <button @onclick="() => EditMenu(menu.Id)">Edit</button>
+                        <button @onclick="() => DeleteMenu(menu.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <br />
+        <button @onclick="PreviousPage" disabled="@(currentPage == 0)">Previous</button>
+        <span> Page @(currentPage + 1) of @TotalPages </span>
+        <button @onclick="NextPage" disabled="@(currentPage >= TotalPages - 1)">Next</button>
+    }
+
+</div>
+
+@code {
+    private List<Menu> menus = new List<Menu>();
+    private MenuController menuCtrl = new MenuController();
+    private int currentPage = 0;
+    private int pageSize = 10;
+
+    protected override void OnInitialized()
+    {
+        LoadMenus();
+    }
+
+    // carga los menus del usuario ordenados por fecha
+    private void LoadMenus()
+    {
+        menus = menuCtrl.GetMenusByUser(Session.CurrentUser.Id);
+        menus = menus.OrderByDescending(m => m.Date).ToList();
+    }
+
+    private List<Menu> GetCurrentPage()
+    {
+        return menus.Skip(currentPage * pageSize).Take(pageSize).ToList();
+    }
+
+    private int TotalPages => (int)Math.Ceiling((double)menus.Count / pageSize);
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+            currentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < TotalPages - 1)
+            currentPage++;
+    }
+
+    private void EditMenu(int id) => Nav.NavigateTo("/editmenu/" + id);
+
+    private void DeleteMenu(int id)
+    {
+        menuCtrl.DeleteMenu(id);
+        LoadMenus();
+    }
+
+    private void GoToNewMenu() => Nav.NavigateTo("/editmenu/0");
+    private void GoToSuggested() => Nav.NavigateTo("/suggestedmenus");
+    private void GoBack() => Nav.NavigateTo("/dashboard");
+}

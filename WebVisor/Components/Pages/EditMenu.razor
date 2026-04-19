@@ -1,0 +1,207 @@
+@page "/editmenu/{menuId:int}"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>@(menuId == 0 ? "New Menu" : "Edit Menu")</h3>
+
+    <div>
+        <label>Name:</label>
+        <input type="text" @bind="menuName" />
+    </div>
+
+    <div>
+        <label>Date:</label>
+        <input type="date" @bind="menuDate" />
+    </div>
+
+    <div>
+        <label>Meal Time:</label>
+        <select @bind="mealTime">
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+        </select>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Add Food:</label>
+        <select @bind="selectedFoodId">
+            @foreach (var food in foods)
+            {
+                <option value="@food.Id">@food.Name</option>
+            }
+        </select>
+        <button @onclick="AddFood">Add</button>
+    </div>
+
+    <br />
+
+    @if (currentItems.Count > 0)
+    {
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>Food</th>
+                <th>Portion</th>
+                <th>Calories</th>
+                <th>Protein</th>
+                <th>Carbs</th>
+                <th>Fat</th>
+                <th>Remove</th>
+            </tr>
+            @foreach (var item in currentItems)
+            {
+                <tr>
+                    <td>@item.FoodName</td>
+                    <td>@item.PortionGrams g</td>
+                    <td>@Math.Round(item.Calories, 1)</td>
+                    <td>@Math.Round(item.Protein, 1)</td>
+                    <td>@Math.Round(item.Carbohydrates, 1)</td>
+                    <td>@Math.Round(item.Fat, 1)</td>
+                    <td><button @onclick="() => RemoveFood(item)">Remove</button></td>
+                </tr>
+            }
+        </table>
+
+        <br />
+        <p>Total Calories: @Math.Round(totalCalories, 1) kcal</p>
+        <p>Protein: @Math.Round(totalProtein, 1) g</p>
+        <p>Carbs: @Math.Round(totalCarbs, 1) g</p>
+        <p>Fat: @Math.Round(totalFat, 1) g</p>
+    }
+
+    <br />
+    <button @onclick="SaveMenu">Save</button>
+    <button @onclick="GoBack">Cancel</button>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+</div>
+
+@code {
+    [Parameter] public int menuId { get; set; }
+
+    private string menuName = "";
+    private DateTime menuDate = DateTime.Today;
+    private string mealTime = "Breakfast";
+    private int selectedFoodId = 0;
+    private string message = "";
+
+    private List<FoodProduct> foods = new List<FoodProduct>();
+    private List<MenuItem> currentItems = new List<MenuItem>();
+
+    private double totalCalories = 0;
+    private double totalProtein = 0;
+    private double totalCarbs = 0;
+    private double totalFat = 0;
+
+    private MenuController menuCtrl = new MenuController();
+    private FoodController foodCtrl = new FoodController();
+
+    // carga los datos al iniciar
+    protected override void OnInitialized()
+    {
+        foods = foodCtrl.GetAllFoods();
+
+        if (foods.Count > 0)
+            selectedFoodId = foods[0].Id;
+
+        if (menuId != 0)
+        {
+            List<Menu> userMenus = menuCtrl.GetMenusByUser(Session.CurrentUser.Id);
+            foreach (Menu m in userMenus)
+            {
+                if (m.Id == menuId)
+                {
+                    menuName = m.Name;
+                    menuDate = m.Date;
+                    mealTime = m.MealTime;
+                    currentItems = m.Items;
+                    break;
+                }
+            }
+            CalculateTotals();
+        }
+    }
+
+    // agrega un alimento al menu
+    private void AddFood()
+    {
+        FoodProduct food = foodCtrl.GetById(selectedFoodId);
+        if (food == null) return;
+
+        MenuItem item = new MenuItem();
+        item.FoodProductId = food.Id;
+        item.FoodName = food.Name;
+        item.PortionGrams = food.PortionGrams;
+        item.Calories = food.Calories;
+        item.Protein = food.Protein;
+        item.Carbohydrates = food.Carbohydrates;
+        item.Fat = food.Fat;
+
+        currentItems.Add(item);
+        CalculateTotals();
+    }
+
+    private void RemoveFood(MenuItem item)
+    {
+        currentItems.Remove(item);
+        CalculateTotals();
+    }
+
+    // calcula los totales del menu
+    private void CalculateTotals()
+    {
+        totalCalories = 0;
+        totalProtein = 0;
+        totalCarbs = 0;
+        totalFat = 0;
+
+        foreach (MenuItem item in currentItems)
+        {
+            totalCalories += item.Calories;
+            totalProtein += item.Protein;
+            totalCarbs += item.Carbohydrates;
+            totalFat += item.Fat;
+        }
+    }
+
+    private void SaveMenu()
+    {
+        if (menuName == "")
+        {
+            message = "Please enter a name.";
+            return;
+        }
+
+        Menu menu = new Menu();
+        menu.UserId = Session.CurrentUser.Id;
+        menu.Name = menuName;
+        menu.Date = menuDate;
+        menu.MealTime = mealTime;
+        menu.Items = currentItems;
+
+        if (menuId == 0)
+            menuCtrl.CreateMenu(menu);
+        else
+        {
+            menu.Id = menuId;
+            menuCtrl.UpdateMenu(menu);
+        }
+
+        Nav.NavigateTo("/menus");
+    }
+
+    private void GoBack() => Nav.NavigateTo("/menus");
+}

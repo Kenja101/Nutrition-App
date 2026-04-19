@@ -1,0 +1,71 @@
+@page "/suggestedmenus"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Suggested Menus</h3>
+    <p>Diet Type: @Session.CurrentUser.DietType</p>
+
+    <button @onclick="GoBack">Back to Menus</button>
+
+    <br /><br />
+
+    <table border="1" style="margin:auto;">
+        <tr>
+            <th>Meal</th>
+            <th>Name</th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Carbs</th>
+            <th>Fat</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var menu in suggestedMenus)
+        {
+            <tr>
+                <td>@menu.MealTime</td>
+                <td>@menu.Name</td>
+                <td>@Math.Round(menu.TotalCalories, 1) kcal</td>
+                <td>@Math.Round(menu.TotalProtein, 1) g</td>
+                <td>@Math.Round(menu.TotalCarbohydrates, 1) g</td>
+                <td>@Math.Round(menu.TotalFat, 1) g</td>
+                <td><button @onclick="() => AddMenu(menu)">Add to My Menus</button></td>
+            </tr>
+        }
+    </table>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+</div>
+
+@code {
+    private List<Menu> suggestedMenus = new List<Menu>();
+    private SuggestedMenuController suggestedCtrl = new SuggestedMenuController();
+    private string message = "";
+
+    // carga los menus sugeridos al iniciar
+    protected override void OnInitialized()
+    {
+        suggestedMenus = suggestedCtrl.GetSuggestedMenus(
+            Session.CurrentUser.DietType,
+            Session.CurrentUser.Id
+        );
+    }
+
+    // agrega el menu sugerido a los menus del usuario
+    private void AddMenu(Menu menu)
+    {
+        suggestedCtrl.SaveMenu(menu);
+        message = menu.Name + " added to your menus.";
+    }
+
+    private void GoBack() => Nav.NavigateTo("/menus");
+}

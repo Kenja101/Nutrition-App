@@ -1,0 +1,202 @@
+@page "/statistics"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@inject NavigationManager Nav
+@inject SessionService Session
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Statistics</h3>
+
+    <div>
+        <label>From:</label>
+        <input type="date" @bind="startDate" />
+    </div>
+
+    <div>
+        <label>To:</label>
+        <input type="date" @bind="endDate" />
+    </div>
+
+    <button @onclick="Calculate">Calculate</button>
+    <button @onclick="GoBack">Back to Dashboard</button>
+
+    @if (errorMessage != "")
+    {
+        <p style="color:red;">@errorMessage</p>
+    }
+
+    @if (calculated)
+    {
+        <br />
+        <p>Total Menus: @totalMenus</p>
+        <p>Days Tracked: @totalDays</p>
+        <p>Daily Goal: @dailyGoal kcal</p>
+        <p>Days Goal Met: @daysGoalMet / @totalDays</p>
+        <p>Total Calories: @Math.Round(totalCalories, 1) kcal</p>
+        <p>Avg/Day Calories: @Math.Round(avgCalories, 1) kcal (Goal: @dailyGoal)</p>
+        <p>Total Protein: @Math.Round(totalProtein, 1) g</p>
+        <p>Avg/Day Protein: @Math.Round(avgProtein, 1) g</p>
+        <p>Total Carbs: @Math.Round(totalCarbs, 1) g</p>
+        <p>Avg/Day Carbs: @Math.Round(avgCarbs, 1) g</p>
+        <p>Total Fat: @Math.Round(totalFat, 1) g</p>
+        <p>Avg/Day Fat: @Math.Round(avgFat, 1) g</p>
+
+        <br />
+        <h4>Daily Breakdown</h4>
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>Date</th>
+                <th>Calories</th>
+                <th>Status</th>
+                <th>Protein</th>
+                <th>Carbs</th>
+                <th>Fat</th>
+            </tr>
+            @foreach (var day in dailyBreakdown)
+            {
+                <tr>
+                    <td>@day.Date</td>
+                    <td>@Math.Round(day.Calories, 0) kcal</td>
+                    <td>@day.Status</td>
+                    <td>@Math.Round(day.Protein, 1) g</td>
+                    <td>@Math.Round(day.Carbs, 1) g</td>
+                    <td>@Math.Round(day.Fat, 1) g</td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+
+@code {
+    private DateTime startDate = DateTime.Today.AddDays(-15);
+    private DateTime endDate = DateTime.Today;
+    private string errorMessage = "";
+    private bool calculated = false;
+
+    private int totalMenus = 0;
+    private int totalDays = 0;
+    private int daysGoalMet = 0;
+    private double dailyGoal = 0;
+    private double totalCalories = 0;
+    private double avgCalories = 0;
+    private double totalProtein = 0;
+    private double avgProtein = 0;
+    private double totalCarbs = 0;
+    private double avgCarbs = 0;
+    private double totalFat = 0;
+    private double avgFat = 0;
+
+    private List<DayStats> dailyBreakdown = new List<DayStats>();
+    private MenuController menuCtrl = new MenuController();
+    private NutritionService nutritionService = new NutritionService();
+
+    // clase simple para guardar stats por dia
+    private class DayStats
+    {
+        public string Date { get; set; }
+        public double Calories { get; set; }
+        public double Protein { get; set; }
+        public double Carbs { get; set; }
+        public double Fat { get; set; }
+        public string Status { get; set; }
+    }
+
+    // calcula las estadisticas del rango de fechas
+    private void Calculate()
+    {
+        errorMessage = "";
+        calculated = false;
+
+        if (startDate > endDate)
+        {
+            errorMessage = "Start date must be before end date.";
+            return;
+        }
+
+        User user = Session.CurrentUser;
+        dailyGoal = nutritionService.CalculateDailyCalories(user);
+
+        List<Menu> allMenus = menuCtrl.GetMenusByUser(user.Id);
+        List<Menu> filtered = new List<Menu>();
+
+        foreach (Menu m in allMenus)
+        {
+            if (m.Date.Date >= startDate.Date && m.Date.Date <= endDate.Date)
+                filtered.Add(m);
+        }
+
+        if (filtered.Count == 0)
+        {
+            errorMessage = "No menus found for that date range.";
+            return;
+        }
+
+        totalMenus = filtered.Count;
+        totalCalories = 0;
+        totalProtein = 0;
+        totalCarbs = 0;
+        totalFat = 0;
+        daysGoalMet = 0;
+        dailyBreakdown = new List<DayStats>();
+
+        List<string> days = new List<string>();
+        foreach (Menu m in filtered)
+        {
+            string day = m.Date.Date.ToString("yyyy-MM-dd");
+            if (!days.Contains(day))
+                days.Add(day);
+
+            totalCalories += m.TotalCalories;
+            totalProtein += m.TotalProtein;
+            totalCarbs += m.TotalCarbohydrates;
+            totalFat += m.TotalFat;
+        }
+
+        totalDays = days.Count;
+
+        foreach (string day in days)
+        {
+            double dayCalories = 0;
+            double dayProtein = 0;
+            double dayCarbs = 0;
+            double dayFat = 0;
+
+            foreach (Menu m in filtered)
+            {
+                if (m.Date.Date.ToString("yyyy-MM-dd") == day)
+                {
+                    dayCalories += m.TotalCalories;
+                    dayProtein += m.TotalProtein;
+                    dayCarbs += m.TotalCarbohydrates;
+                    dayFat += m.TotalFat;
+                }
+            }
+
+            bool goalMet = Math.Abs(dayCalories - dailyGoal) <= 100;
+            if (goalMet) daysGoalMet++;
+
+            dailyBreakdown.Add(new DayStats
+            {
+                Date = day,
+                Calories = dayCalories,
+                Protein = dayProtein,
+                Carbs = dayCarbs,
+                Fat = dayFat,
+                Status = goalMet ? "OK" : "MISS"
+            });
+        }
+
+        avgCalories = totalCalories / totalDays;
+        avgProtein = totalProtein / totalDays;
+        avgCarbs = totalCarbs / totalDays;
+        avgFat = totalFat / totalDays;
+
+        calculated = true;
+    }
+
+    private void GoBack() => Nav.NavigateTo("/dashboard");
+}
