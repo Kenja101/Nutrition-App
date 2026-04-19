@@ -1,0 +1,176 @@
+@page "/adminstats"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@inject NavigationManager Nav
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Global Statistics</h3>
+
+    <button @onclick="GoBack">Back to Admin Panel</button>
+
+    <br /><br />
+
+    <div>
+        <label>From:</label>
+        <input type="date" @bind="startDate" />
+    </div>
+
+    <div>
+        <label>To:</label>
+        <input type="date" @bind="endDate" />
+    </div>
+
+    <button @onclick="Calculate">Calculate</button>
+
+    @if (errorMessage != "")
+    {
+        <p style="color:red;">@errorMessage</p>
+    }
+
+    @if (calculated)
+    {
+        <br />
+        <h4>Most Consumed Products</h4>
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>Product</th>
+                <th>Times Used</th>
+            </tr>
+            @foreach (var item in topProducts)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </table>
+
+        <br />
+        <h4>Diet Type Distribution</h4>
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>Diet Type</th>
+                <th>Users</th>
+                <th>Percentage</th>
+            </tr>
+            @foreach (var item in dietDistribution)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                    <td>@Math.Round((double)item.Value / totalUsers * 100, 1) %</td>
+                </tr>
+            }
+        </table>
+
+        <br />
+        <h4>Users with Most Menus</h4>
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>User</th>
+                <th>Menus</th>
+            </tr>
+            @foreach (var item in topUsers)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+
+@code {
+    private DateTime startDate = DateTime.Today.AddDays(-30);
+    private DateTime endDate = DateTime.Today;
+    private string errorMessage = "";
+    private bool calculated = false;
+    private int totalUsers = 0;
+
+    private List<KeyValuePair<string, int>> topProducts = new List<KeyValuePair<string, int>>();
+    private List<KeyValuePair<string, int>> dietDistribution = new List<KeyValuePair<string, int>>();
+    private List<KeyValuePair<string, int>> topUsers = new List<KeyValuePair<string, int>>();
+
+    private MenuController menuCtrl = new MenuController();
+    private UserController userCtrl = new UserController();
+    private FoodController foodCtrl = new FoodController();
+
+    // calcula las estadisticas globales
+    private void Calculate()
+    {
+        errorMessage = "";
+        calculated = false;
+        topProducts = new List<KeyValuePair<string, int>>();
+        dietDistribution = new List<KeyValuePair<string, int>>();
+        topUsers = new List<KeyValuePair<string, int>>();
+
+        if (startDate > endDate)
+        {
+            errorMessage = "Start date must be before end date.";
+            return;
+        }
+
+        List<User> users = userCtrl.GetAll();
+        totalUsers = users.Count;
+
+        Dictionary<string, int> productCount = new Dictionary<string, int>();
+        Dictionary<string, int> userMenuCount = new Dictionary<string, int>();
+
+        foreach (User user in users)
+        {
+            List<Menu> menus = menuCtrl.GetMenusByUser(user.Id);
+            int count = 0;
+
+            foreach (Menu m in menus)
+            {
+                if (m.Date.Date >= startDate.Date && m.Date.Date <= endDate.Date)
+                {
+                    count++;
+                    foreach (MenuItem item in m.Items)
+                    {
+                        FoodProduct food = foodCtrl.GetById(item.FoodProductId);
+                        string foodName = food != null ? food.Name : item.FoodName;
+                        if (foodName == "Food item" || foodName == "") continue;
+                        if (productCount.ContainsKey(foodName))
+                            productCount[foodName]++;
+                        else
+                            productCount[foodName] = 1;
+                    }
+                }
+            }
+
+            if (count > 0)
+                userMenuCount[user.FullName] = count;
+        }
+
+        Dictionary<string, int> diets = new Dictionary<string, int>();
+        foreach (User user in users)
+        {
+            if (user.DietType == "" || user.DietType == null) continue;
+            if (diets.ContainsKey(user.DietType))
+                diets[user.DietType]++;
+            else
+                diets[user.DietType] = 1;
+        }
+
+        topProducts = new List<KeyValuePair<string, int>>(productCount);
+        topProducts.Sort((a, b) => b.Value.CompareTo(a.Value));
+        if (topProducts.Count > 10)
+            topProducts = topProducts.GetRange(0, 10);
+
+        dietDistribution = new List<KeyValuePair<string, int>>(diets);
+
+        topUsers = new List<KeyValuePair<string, int>>(userMenuCount);
+        topUsers.Sort((a, b) => b.Value.CompareTo(a.Value));
+        if (topUsers.Count > 10)
+            topUsers = topUsers.GetRange(0, 10);
+
+        calculated = true;
+    }
+
+    private void GoBack() => Nav.NavigateTo("/admin");
+}

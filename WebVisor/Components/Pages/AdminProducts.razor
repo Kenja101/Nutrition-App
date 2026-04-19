@@ -1,0 +1,171 @@
+@page "/adminproducts"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@inject NavigationManager Nav
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Manage Products</h3>
+
+    <button @onclick="GoBack">Back to Admin Panel</button>
+
+    <br /><br />
+
+    <h4>Add New Product</h4>
+
+    <div>
+        <label>Name:</label>
+        <input type="text" @bind="name" />
+    </div>
+
+    <div>
+        <label>Portion (g):</label>
+        <input type="number" @bind="portion" />
+    </div>
+
+    <div>
+        <label>Calories:</label>
+        <input type="number" @bind="calories" />
+    </div>
+
+    <div>
+        <label>Protein (g):</label>
+        <input type="number" @bind="protein" />
+    </div>
+
+    <div>
+        <label>Carbs (g):</label>
+        <input type="number" @bind="carbs" />
+    </div>
+
+    <div>
+        <label>Fat (g):</label>
+        <input type="number" @bind="fat" />
+    </div>
+
+    <button @onclick="AddProduct">Add Product</button>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+    <br /><br />
+
+    <h4>Product List</h4>
+
+    <table border="1" style="margin:auto;">
+        <tr>
+            <th>Name</th>
+            <th>Portion</th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Carbs</th>
+            <th>Fat</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var food in GetCurrentPage())
+        {
+            <tr>
+                <td>@food.Name</td>
+                <td>@food.PortionGrams g</td>
+                <td>@food.Calories</td>
+                <td>@food.Protein g</td>
+                <td>@food.Carbohydrates g</td>
+                <td>@food.Fat g</td>
+                <td><button @onclick="() => DeleteProduct(food.Id)">Delete</button></td>
+            </tr>
+        }
+    </table>
+
+    <br />
+    <button @onclick="PreviousPage" disabled="@(currentPage == 0)">Previous</button>
+    <span> Page @(currentPage + 1) of @TotalPages </span>
+    <button @onclick="NextPage" disabled="@(currentPage >= TotalPages - 1)">Next</button>
+
+</div>
+
+@code {
+    private List<FoodProduct> foods = new List<FoodProduct>();
+    private FoodController foodCtrl = new FoodController();
+    private int currentPage = 0;
+    private int pageSize = 10;
+    private string message = "";
+
+    private string name = "";
+    private double portion = 0;
+    private double calories = 0;
+    private double protein = 0;
+    private double carbs = 0;
+    private double fat = 0;
+
+    protected override void OnInitialized()
+    {
+        LoadFoods();
+    }
+
+    // carga todos los productos
+    private void LoadFoods()
+    {
+        foods = foodCtrl.GetAllFoods();
+    }
+
+    private List<FoodProduct> GetCurrentPage()
+    {
+        return foods.Skip(currentPage * pageSize).Take(pageSize).ToList();
+    }
+
+    private int TotalPages => (int)Math.Ceiling((double)foods.Count / pageSize);
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+            currentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < TotalPages - 1)
+            currentPage++;
+    }
+
+    // agrega un nuevo producto al catalogo
+    private void AddProduct()
+    {
+        if (name == "")
+        {
+            message = "Please enter a name.";
+            return;
+        }
+
+        FoodProduct food = new FoodProduct();
+        food.Name = name;
+        food.PortionGrams = portion;
+        food.Calories = calories;
+        food.Protein = protein;
+        food.Carbohydrates = carbs;
+        food.Fat = fat;
+
+        foodCtrl.AddFood(food);
+        LoadFoods();
+        message = "Product added.";
+
+        name = "";
+        portion = 0;
+        calories = 0;
+        protein = 0;
+        carbs = 0;
+        fat = 0;
+    }
+
+    // elimina un producto del catalogo
+    private void DeleteProduct(int id)
+    {
+        foodCtrl.DeleteFood(id);
+        LoadFoods();
+        message = "Product deleted.";
+    }
+
+    private void GoBack() => Nav.NavigateTo("/admin");
+}

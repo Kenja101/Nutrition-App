@@ -1,0 +1,125 @@
+@page "/reports"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@using NutritionApp.Services
+@using iText.Kernel.Pdf
+@using iText.Layout
+@using iText.Layout.Element
+@inject NavigationManager Nav
+@inject SessionService Session
+@inject IJSRuntime JS
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Reports</h3>
+
+    <div>
+        <label>From:</label>
+        <input type="date" @bind="startDate" />
+    </div>
+
+    <div>
+        <label>To:</label>
+        <input type="date" @bind="endDate" />
+    </div>
+
+    <button @onclick="DownloadCSV">Download CSV</button>
+    <button @onclick="DownloadPDF">Download PDF</button>
+    <button @onclick="GoBack">Back to Dashboard</button>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+</div>
+
+@code {
+    private DateTime startDate = DateTime.Today.AddDays(-15);
+    private DateTime endDate = DateTime.Today;
+    private string message = "";
+
+    private MenuController menuCtrl = new MenuController();
+    private NutritionService nutritionService = new NutritionService();
+
+    // filtra los menus por rango de fechas
+    private List<Menu> GetFilteredMenus()
+    {
+        List<Menu> menus = menuCtrl.GetMenusByUser(Session.CurrentUser.Id);
+        List<Menu> filtered = new List<Menu>();
+        foreach (Menu m in menus)
+        {
+            if (m.Date.Date >= startDate.Date && m.Date.Date <= endDate.Date)
+                filtered.Add(m);
+        }
+        return filtered;
+    }
+
+    // genera y descarga el reporte en csv
+    private async Task DownloadCSV()
+    {
+        List<Menu> filtered = GetFilteredMenus();
+
+        if (filtered.Count == 0)
+        {
+            message = "No menus found for that date range.";
+            return;
+        }
+
+        string content = "Date,Meal,Name,Calories,Protein,Carbs,Fat\n";
+        foreach (Menu m in filtered)
+        {
+            content += m.Date.ToString("yyyy-MM-dd") + "," +
+                       m.MealTime + "," +
+                       m.Name + "," +
+                       Math.Round(m.TotalCalories, 1) + "," +
+                       Math.Round(m.TotalProtein, 1) + "," +
+                       Math.Round(m.TotalCarbohydrates, 1) + "," +
+                       Math.Round(m.TotalFat, 1) + "\n";
+        }
+
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(content);
+        string base64 = Convert.ToBase64String(bytes);
+        await JS.InvokeVoidAsync("downloadFile", "report.csv", "text/csv", base64);
+    }
+
+    // genera y descarga el reporte en pdf
+    private async Task DownloadPDF()
+    {
+        List<Menu> filtered = GetFilteredMenus();
+
+        if (filtered.Count == 0)
+        {
+            message = "No menus found for that date range.";
+            return;
+        }
+
+        using MemoryStream ms = new MemoryStream();
+        PdfWriter writer = new PdfWriter(ms);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document doc = new Document(pdf);
+
+        doc.Add(new Paragraph("Nutrition Report"));
+        doc.Add(new Paragraph("User: " + Session.CurrentUser.FullName));
+        doc.Add(new Paragraph("From: " + startDate.ToString("yyyy-MM-dd") + " To: " + endDate.ToString("yyyy-MM-dd")));
+        doc.Add(new Paragraph(" "));
+
+        foreach (Menu m in filtered)
+        {
+            doc.Add(new Paragraph(
+                m.Date.ToString("yyyy-MM-dd") + " | " +
+                m.MealTime + " | " +
+                m.Name + " | " +
+                Math.Round(m.TotalCalories, 1) + " kcal"
+            ));
+        }
+
+        doc.Close();
+
+        string base64 = Convert.ToBase64String(ms.ToArray());
+        await JS.InvokeVoidAsync("downloadFile", "report.pdf", "application/pdf", base64);
+    }
+
+    private void GoBack() => Nav.NavigateTo("/dashboard");
+}

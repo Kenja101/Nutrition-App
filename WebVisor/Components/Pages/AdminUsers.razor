@@ -1,0 +1,82 @@
+@page "/adminusers"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@inject NavigationManager Nav
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Manage Users</h3>
+
+    <button @onclick="GoToCreateUser">Create New User</button>
+    <button @onclick="GoBack">Back to Admin Panel</button>
+
+    <br /><br />
+
+    <table border="1" style="margin:auto;">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Diet</th>
+            <th>Goal</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>@user.DietType</td>
+                <td>@user.Goal</td>
+                <td>
+                    <button @onclick="() => ResetPassword(user.Id)">Reset Password</button>
+                    <button @onclick="() => DeleteUser(user.Id)">Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+</div>
+
+@code {
+    private List<User> users = new List<User>();
+    private UserController userCtrl = new UserController();
+    private string message = "";
+
+    // carga todos los usuarios al iniciar
+    protected override void OnInitialized()
+    {
+        LoadUsers();
+    }
+
+    private void LoadUsers()
+    {
+        users = userCtrl.GetAll();
+    }
+
+    // resetea la contrasena del usuario a 1234
+    private void ResetPassword(int id)
+    {
+        User user = userCtrl.GetById(id);
+        user.Password = "1234";
+        userCtrl.UpdateUser(user);
+        message = "Password reset to 1234.";
+    }
+
+    private void DeleteUser(int id)
+    {
+        userCtrl.DeleteUser(id);
+        LoadUsers();
+        message = "User deleted.";
+    }
+
+    private void GoToCreateUser() => Nav.NavigateTo("/createuser");
+    private void GoBack() => Nav.NavigateTo("/admin");
+}

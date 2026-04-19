@@ -1,0 +1,137 @@
+@page "/createuser"
+@rendermode InteractiveServer
+@using NutritionApp.Controllers
+@using NutritionApp.Models
+@inject NavigationManager Nav
+
+<div style="text-align:center; margin-top:50px;">
+
+    <h3>Create New User</h3>
+
+    <div>
+        <label>Full Name:</label>
+        <input type="text" @bind="fullName" />
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input type="text" @bind="email" />
+    </div>
+
+    <div>
+        <label>Password:</label>
+        <input type="password" @bind="password" />
+    </div>
+
+    <div>
+        <label>Age:</label>
+        <input type="number" @bind="age" />
+    </div>
+
+    <div>
+        <label>Weight (kg):</label>
+        <input type="number" @bind="weight" />
+    </div>
+
+    <div>
+        <label>Height (cm):</label>
+        <input type="number" @bind="height" />
+    </div>
+
+    <div>
+        <label>Activity Level:</label>
+        <select @bind="activityLevel">
+            <option value="Sedentary">Sedentary</option>
+            <option value="Light">Light</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Active">Active</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Goal:</label>
+        <select @bind="goal">
+            <option value="MaintainWeight">Maintain Weight</option>
+            <option value="LoseFat">Lose Fat</option>
+            <option value="GainMuscle">Gain Muscle</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Diet Type:</label>
+        <select @bind="dietType">
+            <option value="Standard">Standard</option>
+            <option value="Keto">Keto</option>
+            <option value="Vegetarian">Vegetarian</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Role:</label>
+        <select @bind="role">
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+        </select>
+    </div>
+
+    <div>
+        <button @onclick="CreateUser">Create User</button>
+        <button @onclick="GoBack">Back</button>
+    </div>
+
+    @if (message != "")
+    {
+        <p>@message</p>
+    }
+
+</div>
+
+@code {
+    private string fullName = "";
+    private string email = "";
+    private string password = "";
+    private int age = 0;
+    private double weight = 0;
+    private double height = 0;
+    private string activityLevel = "Sedentary";
+    private string goal = "MaintainWeight";
+    private string dietType = "Standard";
+    private string role = "User";
+    private string message = "";
+
+    private UserController userCtrl = new UserController();
+
+    // crea un nuevo usuario
+    private void CreateUser()
+    {
+        if (fullName == "" || email == "" || password == "")
+        {
+            message = "Please fill in all fields.";
+            return;
+        }
+
+        User newUser = new User();
+        newUser.FullName = fullName;
+        newUser.Email = email;
+        newUser.Password = password;
+        newUser.Age = age;
+        newUser.Weight = weight;
+        newUser.Height = height;
+        newUser.ActivityLevel = activityLevel;
+        newUser.Goal = goal;
+        newUser.DietType = dietType;
+        newUser.Role = role;
+
+        bool ok = userCtrl.Register(newUser);
+
+        if (!ok)
+        {
+            message = "Email already exists.";
+            return;
+        }
+
+        message = "User created successfully.";
+    }
+
+    private void GoBack() => Nav.NavigateTo("/adminusers");
+}
