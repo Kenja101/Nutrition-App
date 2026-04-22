@@ -8,21 +8,23 @@
 
 <div style="text-align:center; margin-top:50px;">
     <h1>Welcome to Nutrition App</h1>
-     <p>Please login to continue.</p>
+    <p>Please login to continue.</p>
 
-    <div>
-        <label>Email:</label>
-        <input type="text" @bind="email" />
-    </div>
-
-    <div>
-        <label>Password:</label>
-        <input type="password" @bind="password" />
-    </div>
-
-    <div>
-        <button @onclick="DoLogin">Login</button>
-    </div>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>Email:</label></td>
+            <td><input type="text" @bind="email" /></td>
+        </tr>
+        <tr>
+            <td><label>Password:</label></td>
+            <td><input type="password" @bind="password" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; padding-top:8px;">
+                <button @onclick="DoLogin">Login</button>
+            </td>
+        </tr>
+    </table>
 
     @if (errorMessage != "")
     {
@@ -48,10 +50,10 @@
         User user = userCtrl.Login(email, password);
 
         if (user == null)
-        {
-            errorMessage = "Email or password is wrong.";
-            return;
-        }
+       {
+          errorMessage = "Email or password is wrong or account is inactive.";
+          return;
+         }
 
         Session.CurrentUser = user;
 
