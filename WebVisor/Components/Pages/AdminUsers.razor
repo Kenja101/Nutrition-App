@@ -1,3 +1,4 @@
+@using System.Linq
 @page "/adminusers"
 @rendermode InteractiveServer
 @using NutritionApp.Controllers
@@ -19,24 +20,42 @@
             <th>Email</th>
             <th>Role</th>
             <th>Diet</th>
-            <th>Goal</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
-        @foreach (var user in users)
+        @foreach (var user in GetCurrentPage())
         {
             <tr>
                 <td>@user.FullName</td>
                 <td>@user.Email</td>
                 <td>@user.Role</td>
                 <td>@user.DietType</td>
-                <td>@user.Goal</td>
+                <td>@(user.IsActive ? "Active" : "Inactive")</td>
                 <td>
-                    <button @onclick="() => ResetPassword(user.Id)">Reset Password</button>
+                    <button @onclick="() => ShowResetPassword(user.Id)">Reset Password</button>
+                    <button @onclick="() => ToggleActive(user.Id)">@(user.IsActive ? "Deactivate" : "Activate")</button>
                     <button @onclick="() => DeleteUser(user.Id)">Delete</button>
                 </td>
             </tr>
         }
     </table>
+
+    <br />
+    <button @onclick="PreviousPage" disabled="@(currentPage == 0)">Previous</button>
+    <span> Page @(currentPage + 1) of @TotalPages </span>
+    <button @onclick="NextPage" disabled="@(currentPage >= TotalPages - 1)">Next</button>
+
+    @if (showReset)
+    {
+        <br /><br />
+        <h4>Reset Password</h4>
+        <div>
+            <label>New Password:</label>
+            <input type="password" @bind="newPassword" />
+        </div>
+        <button @onclick="ResetPassword">Save Password</button>
+        <button @onclick="CancelReset">Cancel</button>
+    }
 
     @if (message != "")
     {
@@ -48,7 +67,12 @@
 @code {
     private List<User> users = new List<User>();
     private UserController userCtrl = new UserController();
+    private int currentPage = 0;
+    private int pageSize = 10;
     private string message = "";
+    private bool showReset = false;
+    private int resetUserId = 0;
+    private string newPassword = "";
 
     // carga todos los usuarios al iniciar
     protected override void OnInitialized()
@@ -59,15 +83,66 @@
     private void LoadUsers()
     {
         users = userCtrl.GetAll();
+        users = users.OrderBy(u => u.FullName).ToList();
     }
 
-    // resetea la contrasena del usuario a 1234
-    private void ResetPassword(int id)
+    private List<User> GetCurrentPage()
     {
-        User user = userCtrl.GetById(id);
-        user.Password = "1234";
+        return users.Skip(currentPage * pageSize).Take(pageSize).ToList();
+    }
+
+    private int TotalPages => (int)Math.Ceiling((double)users.Count / pageSize);
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+            currentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < TotalPages - 1)
+            currentPage++;
+    }
+
+    // muestra el formulario de reset password
+    private void ShowResetPassword(int id)
+    {
+        resetUserId = id;
+        newPassword = "";
+        showReset = true;
+        message = "";
+    }
+
+    private void CancelReset()
+    {
+        showReset = false;
+        newPassword = "";
+    }
+
+    // resetea la contrasena del usuario
+    private void ResetPassword()
+    {
+        if (newPassword == "")
+        {
+            message = "Please enter a new password.";
+            return;
+        }
+
+        User user = userCtrl.GetById(resetUserId);
+        user.Password = newPassword;
         userCtrl.UpdateUser(user);
-        message = "Password reset to 1234.";
+        showReset = false;
+        newPassword = "";
+        message = "Password updated successfully.";
+    }
+
+    // activa o desactiva un usuario
+    private void ToggleActive(int id)
+    {
+        userCtrl.ToggleActive(id);
+        LoadUsers();
+        message = "User status updated.";
     }
 
     private void DeleteUser(int id)
@@ -76,6 +151,7 @@
         LoadUsers();
         message = "User deleted.";
     }
+
 
     private void GoToCreateUser() => Nav.NavigateTo("/createuser");
     private void GoBack() => Nav.NavigateTo("/admin");

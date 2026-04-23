@@ -1,3 +1,4 @@
+@using System.Linq
 @page "/adminproducts"
 @rendermode InteractiveServer
 @using NutritionApp.Controllers
@@ -14,37 +15,37 @@
 
     <h4>Add New Product</h4>
 
-    <div>
-        <label>Name:</label>
-        <input type="text" @bind="name" />
-    </div>
-
-    <div>
-        <label>Portion (g):</label>
-        <input type="number" @bind="portion" />
-    </div>
-
-    <div>
-        <label>Calories:</label>
-        <input type="number" @bind="calories" />
-    </div>
-
-    <div>
-        <label>Protein (g):</label>
-        <input type="number" @bind="protein" />
-    </div>
-
-    <div>
-        <label>Carbs (g):</label>
-        <input type="number" @bind="carbs" />
-    </div>
-
-    <div>
-        <label>Fat (g):</label>
-        <input type="number" @bind="fat" />
-    </div>
-
-    <button @onclick="AddProduct">Add Product</button>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>Name:</label></td>
+            <td><input type="text" @bind="name" /></td>
+        </tr>
+        <tr>
+            <td><label>Portion (g):</label></td>
+            <td><input type="number" @bind="portion" /></td>
+        </tr>
+        <tr>
+            <td><label>Calories:</label></td>
+            <td><input type="number" @bind="calories" /></td>
+        </tr>
+        <tr>
+            <td><label>Protein (g):</label></td>
+            <td><input type="number" @bind="protein" /></td>
+        </tr>
+        <tr>
+            <td><label>Carbs (g):</label></td>
+            <td><input type="number" @bind="carbs" /></td>
+        </tr>
+        <tr>
+            <td><label>Fat (g):</label></td>
+            <td><input type="number" @bind="fat" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; padding-top:8px;">
+                <button @onclick="AddProduct">Add Product</button>
+            </td>
+        </tr>
+    </table>
 
     @if (message != "")
     {
@@ -105,10 +106,10 @@
         LoadFoods();
     }
 
-    // carga todos los productos
     private void LoadFoods()
     {
         foods = foodCtrl.GetAllFoods();
+        foods = foods.OrderBy(f => f.Name).ToList();
     }
 
     private List<FoodProduct> GetCurrentPage()
@@ -130,7 +131,6 @@
             currentPage++;
     }
 
-    // agrega un nuevo producto al catalogo
     private void AddProduct()
     {
         if (name == "")
@@ -159,7 +159,6 @@
         fat = 0;
     }
 
-    // elimina un producto del catalogo
     private void DeleteProduct(int id)
     {
         foodCtrl.DeleteFood(id);

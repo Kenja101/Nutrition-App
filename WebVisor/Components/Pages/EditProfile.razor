@@ -10,63 +10,65 @@
 
     <h3>Edit Profile</h3>
 
-    <div>
-        <label>Full Name:</label>
-        <input type="text" @bind="fullName" />
-    </div>
-
-    <div>
-        <label>Email:</label>
-        <input type="text" @bind="email" />
-    </div>
-
-    <div>
-        <label>Age:</label>
-        <input type="number" @bind="age" />
-    </div>
-
-    <div>
-        <label>Weight (kg):</label>
-        <input type="number" @bind="weight" />
-    </div>
-
-    <div>
-        <label>Height (cm):</label>
-        <input type="number" @bind="height" />
-    </div>
-
-    <div>
-        <label>Activity Level:</label>
-        <select @bind="activityLevel">
-            <option value="Sedentary">Sedentary</option>
-            <option value="Light">Light</option>
-            <option value="Moderate">Moderate</option>
-            <option value="Active">Active</option>
-        </select>
-    </div>
-
-    <div>
-        <label>Goal:</label>
-        <select @bind="goal">
-            <option value="MaintainWeight">Maintain Weight</option>
-            <option value="LoseFat">Lose Fat</option>
-            <option value="GainMuscle">Gain Muscle</option>
-        </select>
-    </div>
-
-    <div>
-        <label>Diet Type:</label>
-        <select @bind="dietType">
-            <option value="Standard">Standard</option>
-            <option value="Keto">Keto</option>
-            <option value="Vegetarian">Vegetarian</option>
-        </select>
-    </div>
-
-    <div>
-        <button @onclick="SaveChanges">Save Changes</button>
-        <button @onclick="GoBack">Back</button>
-    </div>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>Full Name:</label></td>
+            <td><input type="text" @bind="fullName" /></td>
+        </tr>
+        <tr>
+            <td><label>Email:</label></td>
+            <td><input type="text" @bind="email" /></td>
+        </tr>
+        <tr>
+            <td><label>Age:</label></td>
+            <td><input type="number" @bind="age" /></td>
+        </tr>
+        <tr>
+            <td><label>Weight (kg):</label></td>
+            <td><input type="number" @bind="weight" /></td>
+        </tr>
+        <tr>
+            <td><label>Height (cm):</label></td>
+            <td><input type="number" @bind="height" /></td>
+        </tr>
+        <tr>
+            <td><label>Activity Level:</label></td>
+            <td>
+                <select @bind="activityLevel">
+                    <option value="Sedentary">Sedentary</option>
+                    <option value="Light">Light</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Active">Active</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Goal:</label></td>
+            <td>
+                <select @bind="goal">
+                    <option value="MaintainWeight">Maintain Weight</option>
+                    <option value="LoseFat">Lose Fat</option>
+                    <option value="GainMuscle">Gain Muscle</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Diet Type:</label></td>
+            <td>
+                <select @bind="dietType">
+                    <option value="Standard">Standard</option>
+                    <option value="Keto">Keto</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; padding-top:8px;">
+                <button @onclick="SaveChanges">Save Changes</button>
+                <button @onclick="GoBack">Back to Dashboard</button>
+            </td>
+        </tr>
+    </table>
 
     @if (message != "")
     {
@@ -88,7 +90,6 @@
 
     private UserController userCtrl = new UserController();
 
-    // carga los datos del usuario al iniciar
     protected override void OnInitialized()
     {
         User user = Session.CurrentUser;
@@ -102,7 +103,6 @@
         dietType = user.DietType;
     }
 
-    // guarda los cambios del perfil
     private void SaveChanges()
     {
         User user = Session.CurrentUser;

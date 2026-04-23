@@ -10,38 +10,45 @@
 
     <h3>@(menuId == 0 ? "New Menu" : "Edit Menu")</h3>
 
-    <div>
-        <label>Name:</label>
-        <input type="text" @bind="menuName" />
-    </div>
-
-    <div>
-        <label>Date:</label>
-        <input type="date" @bind="menuDate" />
-    </div>
-
-    <div>
-        <label>Meal Time:</label>
-        <select @bind="mealTime">
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-            <option value="Snack">Snack</option>
-        </select>
-    </div>
-
-    <br />
-
-    <div>
-        <label>Add Food:</label>
-        <select @bind="selectedFoodId">
-            @foreach (var food in foods)
-            {
-                <option value="@food.Id">@food.Name</option>
-            }
-        </select>
-        <button @onclick="AddFood">Add</button>
-    </div>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>Name:</label></td>
+            <td><input type="text" @bind="menuName" /></td>
+        </tr>
+        <tr>
+            <td><label>Date:</label></td>
+            <td><input type="date" @bind="menuDate" /></td>
+        </tr>
+        <tr>
+            <td><label>Meal Time:</label></td>
+            <td>
+                <select @bind="mealTime">
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Snack">Snack</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Add Food:</label></td>
+            <td>
+                <select @bind="selectedFoodId">
+                    @foreach (var food in foods)
+                    {
+                        <option value="@food.Id">@food.Name</option>
+                    }
+                </select>
+                <button @onclick="AddFood">Add</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; padding-top:8px;">
+                <button @onclick="SaveMenu">Save</button>
+                <button @onclick="GoBack">Cancel</button>
+            </td>
+        </tr>
+    </table>
 
     <br />
 
@@ -78,10 +85,6 @@
         <p>Fat: @Math.Round(totalFat, 1) g</p>
     }
 
-    <br />
-    <button @onclick="SaveMenu">Save</button>
-    <button @onclick="GoBack">Cancel</button>
-
     @if (message != "")
     {
         <p>@message</p>
@@ -109,7 +112,6 @@
     private MenuController menuCtrl = new MenuController();
     private FoodController foodCtrl = new FoodController();
 
-    // carga los datos al iniciar
     protected override void OnInitialized()
     {
         foods = foodCtrl.GetAllFoods();
@@ -135,7 +137,6 @@
         }
     }
 
-    // agrega un alimento al menu
     private void AddFood()
     {
         FoodProduct food = foodCtrl.GetById(selectedFoodId);
@@ -160,7 +161,6 @@
         CalculateTotals();
     }
 
-    // calcula los totales del menu
     private void CalculateTotals()
     {
         totalCalories = 0;

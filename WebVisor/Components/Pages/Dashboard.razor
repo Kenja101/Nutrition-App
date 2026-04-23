@@ -10,29 +10,73 @@
 
     <h3>Dashboard</h3>
 
-    <p>Welcome, @user.FullName</p>
-    <p>Email: @user.Email</p>
-    <p>Age: @user.Age</p>
-    <p>Weight: @user.Weight kg</p>
-    <p>Height: @user.Height cm</p>
-    <p>Goal: @user.Goal</p>
-    <p>Diet: @user.DietType</p>
-    <p>Activity: @user.ActivityLevel</p>
+    <table style="margin:auto; text-align:left;">
+        <tr>
+            <td><b>Welcome:</b></td>
+            <td>@user.FullName</td>
+        </tr>
+        <tr>
+            <td><b>Email:</b></td>
+            <td>@user.Email</td>
+        </tr>
+        <tr>
+            <td><b>Age:</b></td>
+            <td>@user.Age</td>
+        </tr>
+        <tr>
+            <td><b>Weight:</b></td>
+            <td>@user.Weight kg</td>
+        </tr>
+        <tr>
+            <td><b>Height:</b></td>
+            <td>@user.Height cm</td>
+        </tr>
+        <tr>
+            <td><b>Goal:</b></td>
+            <td>@user.Goal</td>
+        </tr>
+        <tr>
+            <td><b>Diet:</b></td>
+            <td>@user.DietType</td>
+        </tr>
+        <tr>
+            <td><b>Activity:</b></td>
+            <td>@user.ActivityLevel</td>
+        </tr>
+        <tr><td colspan="2"><hr /></td></tr>
+        <tr>
+            <td><b>BMI:</b></td>
+            <td>@bmi (@bmiCategory)</td>
+        </tr>
+        <tr>
+            <td><b>Maintenance Calories:</b></td>
+            <td>@maintenance kcal</td>
+        </tr>
+        <tr>
+            <td><b>Daily Goal:</b></td>
+            <td>@dailyCalories kcal</td>
+        </tr>
+        <tr><td colspan="2"><hr /></td></tr>
+        <tr>
+            <td><b>Protein:</b></td>
+            <td>@macros.ProteinGrams g (@macros.ProteinCalories kcal)</td>
+        </tr>
+        <tr>
+            <td><b>Carbs:</b></td>
+            <td>@macros.CarbGrams g (@macros.CarbCalories kcal)</td>
+        </tr>
+        <tr>
+            <td><b>Fat:</b></td>
+            <td>@macros.FatGrams g (@macros.FatCalories kcal)</td>
+        </tr>
+    </table>
 
-    <p>BMI: @bmi (@bmiCategory)</p>
-    <p>Maintenance Calories: @maintenance kcal</p>
-    <p>Daily Goal: @dailyCalories kcal</p>
-
-    <p>Protein: @macros.ProteinGrams g (@macros.ProteinCalories kcal)</p>
-    <p>Carbs: @macros.CarbGrams g (@macros.CarbCalories kcal)</p>
-    <p>Fat: @macros.FatGrams g (@macros.FatCalories kcal)</p>
-
+    <br />
     <button @onclick="GoToMenus">My Menus</button>
     <button @onclick="GoToStats">Statistics</button>
-    <button @onclick="GoToEditProfile">Edit Profile</button>
-    <button @onclick="Logout">Logout</button>
+    <button @onclick="GoToEditProfile">Edit Profile</button> 
     <button @onclick="GoToReports">Reports</button>
-
+    <button @onclick="Logout">Logout</button>
 </div>
 
 @code {
@@ -45,7 +89,6 @@
     private MacroDistribution macros = new MacroDistribution();
     private void GoToReports() => Nav.NavigateTo("/reports");
 
-    // carga los datos del usuario al iniciar
     protected override void OnInitialized()
     {
         user = Session.CurrentUser;
@@ -61,5 +104,4 @@
     private void GoToStats() => Nav.NavigateTo("/statistics");
     private void GoToEditProfile() => Nav.NavigateTo("/editprofile");
     private void Logout() => Nav.NavigateTo("/");
-    
 }

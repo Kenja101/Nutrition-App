@@ -10,18 +10,22 @@
 
     <h3>Statistics</h3>
 
-    <div>
-        <label>From:</label>
-        <input type="date" @bind="startDate" />
-    </div>
-
-    <div>
-        <label>To:</label>
-        <input type="date" @bind="endDate" />
-    </div>
-
-    <button @onclick="Calculate">Calculate</button>
-    <button @onclick="GoBack">Back to Dashboard</button>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>From:</label></td>
+            <td><input type="date" @bind="startDate" /></td>
+        </tr>
+        <tr>
+            <td><label>To:</label></td>
+            <td><input type="date" @bind="endDate" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; padding-top:8px;">
+                <button @onclick="Calculate">Calculate</button>
+                <button @onclick="GoBack">Back to Dashboard</button>
+            </td>
+        </tr>
+    </table>
 
     @if (errorMessage != "")
     {
@@ -31,18 +35,56 @@
     @if (calculated)
     {
         <br />
-        <p>Total Menus: @totalMenus</p>
-        <p>Days Tracked: @totalDays</p>
-        <p>Daily Goal: @dailyGoal kcal</p>
-        <p>Days Goal Met: @daysGoalMet / @totalDays</p>
-        <p>Total Calories: @Math.Round(totalCalories, 1) kcal</p>
-        <p>Avg/Day Calories: @Math.Round(avgCalories, 1) kcal (Goal: @dailyGoal)</p>
-        <p>Total Protein: @Math.Round(totalProtein, 1) g</p>
-        <p>Avg/Day Protein: @Math.Round(avgProtein, 1) g</p>
-        <p>Total Carbs: @Math.Round(totalCarbs, 1) g</p>
-        <p>Avg/Day Carbs: @Math.Round(avgCarbs, 1) g</p>
-        <p>Total Fat: @Math.Round(totalFat, 1) g</p>
-        <p>Avg/Day Fat: @Math.Round(avgFat, 1) g</p>
+        <table style="margin:auto; text-align:left;">
+            <tr>
+                <td><b>Total Menus:</b></td>
+                <td>@totalMenus</td>
+            </tr>
+            <tr>
+                <td><b>Days Tracked:</b></td>
+                <td>@totalDays</td>
+            </tr>
+            <tr>
+                <td><b>Daily Goal:</b></td>
+                <td>@dailyGoal kcal</td>
+            </tr>
+            <tr>
+                <td><b>Days Goal Met:</b></td>
+                <td>@daysGoalMet / @totalDays</td>
+            </tr>
+            <tr>
+                <td><b>Total Calories:</b></td>
+                <td>@Math.Round(totalCalories, 1) kcal</td>
+            </tr>
+            <tr>
+                <td><b>Avg/Day Calories:</b></td>
+                <td>@Math.Round(avgCalories, 1) kcal (Goal: @dailyGoal)</td>
+            </tr>
+            <tr>
+                <td><b>Total Protein:</b></td>
+                <td>@Math.Round(totalProtein, 1) g</td>
+            </tr>
+            <tr>
+                <td><b>Avg/Day Protein:</b></td>
+                <td>@Math.Round(avgProtein, 1) g</td>
+            </tr>
+            <tr>
+                <td><b>Total Carbs:</b></td>
+                <td>@Math.Round(totalCarbs, 1) g</td>
+            </tr>
+            <tr>
+                <td><b>Avg/Day Carbs:</b></td>
+                <td>@Math.Round(avgCarbs, 1) g</td>
+            </tr>
+            <tr>
+                <td><b>Total Fat:</b></td>
+                <td>@Math.Round(totalFat, 1) g</td>
+            </tr>
+            <tr>
+                <td><b>Avg/Day Fat:</b></td>
+                <td>@Math.Round(avgFat, 1) g</td>
+            </tr>
+        </table>
 
         <br />
         <h4>Daily Breakdown</h4>
@@ -55,7 +97,7 @@
                 <th>Carbs</th>
                 <th>Fat</th>
             </tr>
-            @foreach (var day in dailyBreakdown)
+            @foreach (var day in GetCurrentPage())
             {
                 <tr>
                     <td>@day.Date</td>
@@ -67,6 +109,11 @@
                 </tr>
             }
         </table>
+
+        <br />
+        <button @onclick="PreviousPage" disabled="@(currentPage == 0)">Previous</button>
+        <span> Page @(currentPage + 1) of @TotalPages </span>
+        <button @onclick="NextPage" disabled="@(currentPage >= TotalPages - 1)">Next</button>
     }
 
 </div>
@@ -76,6 +123,8 @@
     private DateTime endDate = DateTime.Today;
     private string errorMessage = "";
     private bool calculated = false;
+    private int currentPage = 0;
+    private int pageSize = 10;
 
     private int totalMenus = 0;
     private int totalDays = 0;
@@ -94,7 +143,6 @@
     private MenuController menuCtrl = new MenuController();
     private NutritionService nutritionService = new NutritionService();
 
-    // clase simple para guardar stats por dia
     private class DayStats
     {
         public string Date { get; set; }
@@ -105,11 +153,30 @@
         public string Status { get; set; }
     }
 
-    // calcula las estadisticas del rango de fechas
+    private List<DayStats> GetCurrentPage()
+    {
+        return dailyBreakdown.Skip(currentPage * pageSize).Take(pageSize).ToList();
+    }
+
+    private int TotalPages => (int)Math.Ceiling((double)dailyBreakdown.Count / pageSize);
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+            currentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < TotalPages - 1)
+            currentPage++;
+    }
+
     private void Calculate()
     {
         errorMessage = "";
         calculated = false;
+        currentPage = 0;
 
         if (startDate > endDate)
         {

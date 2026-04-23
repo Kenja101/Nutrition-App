@@ -12,17 +12,21 @@
 
     <br /><br />
 
-    <div>
-        <label>From:</label>
-        <input type="date" @bind="startDate" />
-    </div>
-
-    <div>
-        <label>To:</label>
-        <input type="date" @bind="endDate" />
-    </div>
-
-    <button @onclick="Calculate">Calculate</button>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>From:</label></td>
+            <td><input type="date" @bind="startDate" /></td>
+        </tr>
+        <tr>
+            <td><label>To:</label></td>
+            <td><input type="date" @bind="endDate" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center; padding-top:8px;">
+                <button @onclick="Calculate">Calculate</button>
+            </td>
+        </tr>
+    </table>
 
     @if (errorMessage != "")
     {
@@ -38,7 +42,7 @@
                 <th>Product</th>
                 <th>Times Used</th>
             </tr>
-            @foreach (var item in topProducts)
+            @foreach (var item in GetProductsPage())
             {
                 <tr>
                     <td>@item.Key</td>
@@ -46,8 +50,12 @@
                 </tr>
             }
         </table>
-
         <br />
+        <button @onclick="PrevProducts" disabled="@(productsPage == 0)">Previous</button>
+        <span> Page @(productsPage + 1) of @TotalProductsPages </span>
+        <button @onclick="NextProducts" disabled="@(productsPage >= TotalProductsPages - 1)">Next</button>
+
+        <br /><br />
         <h4>Diet Type Distribution</h4>
         <table border="1" style="margin:auto;">
             <tr>
@@ -55,7 +63,7 @@
                 <th>Users</th>
                 <th>Percentage</th>
             </tr>
-            @foreach (var item in dietDistribution)
+            @foreach (var item in GetDietPage())
             {
                 <tr>
                     <td>@item.Key</td>
@@ -64,15 +72,19 @@
                 </tr>
             }
         </table>
-
         <br />
+        <button @onclick="PrevDiet" disabled="@(dietPage == 0)">Previous</button>
+        <span> Page @(dietPage + 1) of @TotalDietPages </span>
+        <button @onclick="NextDiet" disabled="@(dietPage >= TotalDietPages - 1)">Next</button>
+
+        <br /><br />
         <h4>Users with Most Menus</h4>
         <table border="1" style="margin:auto;">
             <tr>
                 <th>User</th>
                 <th>Menus</th>
             </tr>
-            @foreach (var item in topUsers)
+            @foreach (var item in GetUsersPage())
             {
                 <tr>
                     <td>@item.Key</td>
@@ -80,6 +92,10 @@
                 </tr>
             }
         </table>
+        <br />
+        <button @onclick="PrevUsers" disabled="@(usersPage == 0)">Previous</button>
+        <span> Page @(usersPage + 1) of @TotalUsersPages </span>
+        <button @onclick="NextUsers" disabled="@(usersPage >= TotalUsersPages - 1)">Next</button>
     }
 
 </div>
@@ -90,6 +106,11 @@
     private string errorMessage = "";
     private bool calculated = false;
     private int totalUsers = 0;
+    private int pageSize = 5;
+
+    private int productsPage = 0;
+    private int dietPage = 0;
+    private int usersPage = 0;
 
     private List<KeyValuePair<string, int>> topProducts = new List<KeyValuePair<string, int>>();
     private List<KeyValuePair<string, int>> dietDistribution = new List<KeyValuePair<string, int>>();
@@ -99,11 +120,31 @@
     private UserController userCtrl = new UserController();
     private FoodController foodCtrl = new FoodController();
 
-    // calcula las estadisticas globales
+    private List<KeyValuePair<string, int>> GetProductsPage() =>
+        topProducts.Skip(productsPage * pageSize).Take(pageSize).ToList();
+    private int TotalProductsPages => (int)Math.Ceiling((double)topProducts.Count / pageSize);
+    private void PrevProducts() { if (productsPage > 0) productsPage--; }
+    private void NextProducts() { if (productsPage < TotalProductsPages - 1) productsPage++; }
+
+    private List<KeyValuePair<string, int>> GetDietPage() =>
+        dietDistribution.Skip(dietPage * pageSize).Take(pageSize).ToList();
+    private int TotalDietPages => (int)Math.Ceiling((double)dietDistribution.Count / pageSize);
+    private void PrevDiet() { if (dietPage > 0) dietPage--; }
+    private void NextDiet() { if (dietPage < TotalDietPages - 1) dietPage++; }
+
+    private List<KeyValuePair<string, int>> GetUsersPage() =>
+        topUsers.Skip(usersPage * pageSize).Take(pageSize).ToList();
+    private int TotalUsersPages => (int)Math.Ceiling((double)topUsers.Count / pageSize);
+    private void PrevUsers() { if (usersPage > 0) usersPage--; }
+    private void NextUsers() { if (usersPage < TotalUsersPages - 1) usersPage++; }
+
     private void Calculate()
     {
         errorMessage = "";
         calculated = false;
+        productsPage = 0;
+        dietPage = 0;
+        usersPage = 0;
         topProducts = new List<KeyValuePair<string, int>>();
         dietDistribution = new List<KeyValuePair<string, int>>();
         topUsers = new List<KeyValuePair<string, int>>();
@@ -159,15 +200,11 @@
 
         topProducts = new List<KeyValuePair<string, int>>(productCount);
         topProducts.Sort((a, b) => b.Value.CompareTo(a.Value));
-        if (topProducts.Count > 10)
-            topProducts = topProducts.GetRange(0, 10);
 
         dietDistribution = new List<KeyValuePair<string, int>>(diets);
 
         topUsers = new List<KeyValuePair<string, int>>(userMenuCount);
         topUsers.Sort((a, b) => b.Value.CompareTo(a.Value));
-        if (topUsers.Count > 10)
-            topUsers = topUsers.GetRange(0, 10);
 
         calculated = true;
     }
