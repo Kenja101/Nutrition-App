@@ -1,41 +1,28 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+using System.Linq;
 using NutritionApp.Models;
 using Menu = NutritionApp.Models.Menu;
+using Microsoft.EntityFrameworkCore;
 
 namespace NutritionApp.Data
 {
     public class MenuRepository
     {
+        // devuelve todos los menus con sus items
         public List<Menu> GetAll()
         {
-            try
-            {
-                if (!File.Exists(DataPaths.MenusFile))
-                    return new List<Menu>();
-
-                string text = File.ReadAllText(DataPaths.MenusFile);
-                return JsonConvert.DeserializeObject<List<Menu>>(text);
-            }
-     catch (Exception ex)
-    {
-        throw new Exception("Error loading menu: " + ex.Message);
-    }
+            using AppDbContext db = new AppDbContext();
+            return db.Menus.Include(m => m.Items).ToList();
         }
 
+        // guarda todos los menus
         public void SaveAll(List<Menu> menus)
         {
-            try
-            {
-                string text = JsonConvert.SerializeObject(menus, Formatting.Indented);
-                File.WriteAllText(DataPaths.MenusFile, text);
-            }
-    catch (Exception ex)
-    {
-        throw new Exception("Error saving menu: " + ex.Message);
-    }
+            using AppDbContext db = new AppDbContext();
+            db.Menus.RemoveRange(db.Menus);
+            db.MenuItems.RemoveRange(db.MenuItems);
+            db.Menus.AddRange(menus);
+            db.SaveChanges();
         }
     }
 }

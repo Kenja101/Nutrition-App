@@ -1,27 +1,25 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+using System.Linq;
 using NutritionApp.Models;
 
 namespace NutritionApp.Data
 {
     public class FoodRepository
     {
+        // devuelve todos los productos
         public List<FoodProduct> GetAll()
         {
-            try
-            {
-                if (!File.Exists(DataPaths.FoodsFile))
-                    return new List<FoodProduct>();
+            using AppDbContext db = new AppDbContext();
+            return db.Foods.ToList();
+        }
 
-                string text = File.ReadAllText(DataPaths.FoodsFile);
-                return JsonConvert.DeserializeObject<List<FoodProduct>>(text);
-            }
-    catch (Exception ex)
-    {
-        throw new Exception("Error Loading food: " + ex.Message);
-    }
+        // guarda todos los productos
+        public void SaveAll(List<FoodProduct> foods)
+        {
+            using AppDbContext db = new AppDbContext();
+            db.Foods.RemoveRange(db.Foods);
+            db.Foods.AddRange(foods);
+            db.SaveChanges();
         }
     }
 }
