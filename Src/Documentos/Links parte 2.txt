@@ -1,0 +1,3 @@
+https://github.com/Kenja101/Nutrition-App/commits/main/
+
+https://nutritionappv2.atlassian.net/jira/software/projects/SCRUM/list/?jql=project+%3D+%22SCRUM%22+AND+status+%3D+%27Done%27+AND+statusCategoryChangedDate+%3E%3D+-2w&atlOrigin=eyJpIjoiODgxZDg5ZDMxNmU5NGRlY2E0ZjI1OTBlOTQ0ODRmNTgiLCJwIjoiaiJ9
